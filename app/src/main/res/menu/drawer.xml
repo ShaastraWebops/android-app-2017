@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/inbox"
+            android:checked="false"
+            android:title="@string/home_string"
+            android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+        <item
+            android:id="@+id/starred"
+            android:checked="false"
+            android:title="@string/events_string"
+            android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+        <item
+            android:id="@+id/sent_mail"
+            android:checked="false"
+            android:title="@string/workshops_string"
+            android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+        <item
+            android:id="@+id/drafts"
+            android:checked="false"
+            android:title="@string/summit_string"
+            android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+        <item
+            android:id="@+id/allmail"
+            android:checked="false"
+            android:title="@string/sponsors_string"
+            android:textAppearance="?android:attr/textAppearanceMedium"/>
+        <item
+            android:id="@+id/trash"
+            android:checked="false"
+            android:title="@string/aboutus_string"
+            android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+    </group>
+</menu>
