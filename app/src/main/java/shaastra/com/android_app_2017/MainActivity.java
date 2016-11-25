@@ -47,15 +47,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
 
-        Button b1 = (Button)findViewById(R.id.notif_page_button);
-        b1.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, NotificationView.class);
-                startActivity(intent);
-            }
-        });
+
+//        IMPORTANT CODE
+//        Button b1 = (Button)findViewById(R.id.notif_page_button);
+//        b1.setOnClickListener(new View.OnClickListener()
+//        {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MainActivity.this, NotificationView.class);
+//                startActivity(intent);
+//            }
+//        });
 
         setSupportActionBar(toolbar);
 
