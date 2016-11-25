@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/home"
+            android:checked="false"
+            android:title="@string/home_string"
+            android:icon="@drawable/home"
+            android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+        <item
+            android:id="@+id/events"
+            android:checked="false"
+            android:icon="@drawable/events"
+            android:title="@string/events_string"
+            android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+        <item
+            android:id="@+id/work"
+            android:checked="false"
+            android:title="@string/workshops_string"
+            android:icon="@drawable/worker"
+            android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+        <item
+            android:id="@+id/summit"
+            android:checked="false"
+            android:title="@string/summit_string"
+            android:icon="@drawable/summit"
+            android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+        <item android:title="Other">
+            <menu>
+                <item
+                    android:id="@+id/spons"
+                    android:checked="false"
+                    android:title="@string/sponsors_string"
+                    android:icon="@drawable/spons"
+                    android:textAppearance="?android:attr/textAppearanceMedium"/>
+                <item
+                    android:id="@+id/about"
+                    android:checked="false"
+                    android:title="@string/aboutus_string"
+                    android:icon="@drawable/about"
+                    android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+            </menu>
+        </item>
+
+    </group>
+</menu>
