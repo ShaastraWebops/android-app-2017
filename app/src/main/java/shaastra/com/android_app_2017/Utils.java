@@ -1,5 +1,7 @@
 package shaastra.com.android_app_2017;
 
+import android.util.Log;
+
 import java.io.InputStream;
 import java.io.OutputStream;
 
@@ -10,7 +12,7 @@ public class Utils {
 
     public static void CopyStream(InputStream is, OutputStream os)
     {
-        final int buffer_size = 1024;
+        final int buffer_size = 4096;
         try
         {
             byte[] bytes = new byte[buffer_size];
@@ -21,6 +23,7 @@ public class Utils {
                     break;;
                 os.write(bytes, 0, count);
             }
+            Log.d("CACHE_WRITE", String.valueOf(bytes));
         }
         catch (Exception e){}
     }
