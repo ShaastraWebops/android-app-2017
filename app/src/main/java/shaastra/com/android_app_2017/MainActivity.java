@@ -315,4 +315,9 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void eventActivity(MenuItem item){
+        Intent intent = new Intent(this, EventsActivity.class);
+        startActivity(intent);
+    }
 }
