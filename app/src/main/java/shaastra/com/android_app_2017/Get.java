@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
 
@@ -19,7 +20,7 @@ public class Get extends AppCompatActivity {
         String request_url = "http://shaastra.org:8001/api/events";
         GetActivity getActivity = new GetActivity(getApplicationContext());
 
-        JSONObject object = getActivity.getJSONobject(request_url, getApplicationContext());
+        JSONArray object = getActivity.getJSONobject(request_url, getApplicationContext());
 
         tv.setText(String.valueOf(object));
     }
