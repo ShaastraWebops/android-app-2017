@@ -21,6 +21,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 
+import shaastra.com.android_app_2017.feedback.FeedbackActivity;
+
 public class MainActivity extends AppCompatActivity {
 
 
@@ -214,6 +216,11 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.about:
                         // launch new intent instead of loading fragment
                         startActivity(new Intent(MainActivity.this, AboutUsActivity.class));
+                        drawer.closeDrawers();
+                        return true;
+                    case R.id.feedback:
+                        // launch new intent instead of loading fragment
+                        startActivity(new Intent(MainActivity.this,FeedbackActivity.class));
                         drawer.closeDrawers();
                         return true;
 //                    case R.id.nav_privacy_policy:

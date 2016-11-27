@@ -44,6 +44,12 @@
                     android:title="@string/aboutus_string"
                     android:icon="@drawable/about"
                     android:textAppearance="?android:attr/textAppearanceMedium"/>
+                <item
+                    android:id="@+id/feedback"
+                    android:checked="false"
+                    android:title="@string/feedback_string"
+                    android:icon="@drawable/feedback"
+                    android:textAppearance="?android:attr/textAppearanceMedium"/>
 
             </menu>
         </item>
