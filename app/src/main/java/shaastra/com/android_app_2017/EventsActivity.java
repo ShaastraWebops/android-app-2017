@@ -2,9 +2,14 @@ package shaastra.com.android_app_2017;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -21,7 +26,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.mukesh.MarkdownView;
+import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.OnMenuTabSelectedListener;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -35,40 +46,76 @@ public class EventsActivity extends AppCompatActivity {
     private ViewPager mViewPager;
     private JSONObject response;
     private TabLayout tabLayout;
-    private static ArrayList<String> jsonArr = new ArrayList<>(8);
+    private String dialPhone;
+    private static ArrayList<String> jsonArr = new ArrayList<>(5);
 
     //Array of json key in the order of the tabs
-    public ArrayList <String> keyArray = new ArrayList<>();
+    public ArrayList <Integer> keyArray = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_events);
         jsonArr.clear();
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar1);
+        dialPhone = null;
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
+        //TODO Pass the event vertical as an extra to this activity
+        toolbar.setTitle("Event Vertical");
         setSupportActionBar(toolbar);
 
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+
+        CollapsingToolbarLayout toolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
+        if (toolbarLayout != null){
+        }
+
+        //Initialising the Footer with Bootom Navigation bar
+        BottomBar bottomBar = (BottomBar) findViewById(R.id.bottombar);
+        bottomBar.setItemsFromMenu(R.menu.event_footer, new OnMenuTabSelectedListener() {
+            @Override
+            public void onMenuItemSelected(int menuItemId) {
+                switch (menuItemId) {
+                    case R.id.bookmark:
+                        Toast.makeText(getApplicationContext(), "Bookmark", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.locate:
+                        Toast.makeText(getApplicationContext(), "Bookmark", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.call:
+                        if (dialPhone != null) {
+                            Intent intent = new Intent(Intent.ACTION_DIAL);
+                            intent.setData(Uri.parse("tel:" + dialPhone));
+                            startActivity(intent);
+                        }else{
+                            Toast.makeText(getApplicationContext(), "Wait for Coordinator contact to Load", Toast.LENGTH_LONG).show();
+                        }
+                        break;
+                    case R.id.share:
+                        Toast.makeText(getApplicationContext(), "Bookmark", Toast.LENGTH_SHORT).show();
+                        break;
+                }
+            }
+        });
+
         //Assigning keyArray
-        keyArray.add("info");
-        keyArray.add("info");
-        keyArray.add("info");
-        keyArray.add("info");
-        keyArray.add("info");
-        keyArray.add("info");
-        keyArray.add("info");
-        keyArray.add("info");
+        keyArray.add(0);
+        keyArray.add(1);
+        keyArray.add(2);
+        keyArray.add(4);
+        keyArray.add(6);
 
         //Dynamically add fragments to the adapter
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         mSectionsPagerAdapter.addFragment(PlaceholderFragment.newInstance(0), "Home");
-        mSectionsPagerAdapter.addFragment(PlaceholderFragment.newInstance(1), "Event Format");
-        mSectionsPagerAdapter.addFragment(PlaceholderFragment.newInstance(2), "Problem Statement");
-        mSectionsPagerAdapter.addFragment(PlaceholderFragment.newInstance(3), "Registration");
-        mSectionsPagerAdapter.addFragment(PlaceholderFragment.newInstance(4), "Prize Money");
-        mSectionsPagerAdapter.addFragment(PlaceholderFragment.newInstance(5), "Resources");
-        mSectionsPagerAdapter.addFragment(PlaceholderFragment.newInstance(6), "FAQs");
-        mSectionsPagerAdapter.addFragment(PlaceholderFragment.newInstance(7), "Contact Us");
+        mSectionsPagerAdapter.addFragment(PlaceholderFragment.newInstance(1), "Format");
+        mSectionsPagerAdapter.addFragment(PlaceholderFragment.newInstance(2), "PS");
+        mSectionsPagerAdapter.addFragment(PlaceholderFragment.newInstance(3), "Prizes");
+        mSectionsPagerAdapter.addFragment(PlaceholderFragment.newInstance(4), "FAQ");
 
         //Setup adapter to viewPager
         mViewPager = (ViewPager) findViewById(R.id.container);
@@ -78,7 +125,7 @@ public class EventsActivity extends AppCompatActivity {
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
-        new FetchEventTask().execute("http://shaastra.org:8001/api/eventLists/events/57ceccc4a65edf661ac430e4");
+        new FetchEventTask().execute("http://shaastra.org:8001/api/events/showWeb/57d43892a65edf661ac43909");
 
     }
 
@@ -104,11 +151,11 @@ public class EventsActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void saveResponse(JSONObject response){
+    public void saveResponse(JSONArray response){
         int ind = 0;
-        while(ind < 8) {
+        while(ind < 5) {
             try {
-                jsonArr.add(response.getString(keyArray.get(ind)));
+                jsonArr.add(((JSONObject) response.get(keyArray.get(ind))).getString("info"));
             }catch (Exception e){
                 e.printStackTrace();
             }finally {
@@ -123,7 +170,7 @@ public class EventsActivity extends AppCompatActivity {
         //Section Id to identify the fragment
         private static final String ARG_SECTION_ID = "section_id";
         //Textview in the fragment
-        public TextView textView;
+        public MarkdownView textView;
 
         public PlaceholderFragment() {
         }
@@ -142,11 +189,12 @@ public class EventsActivity extends AppCompatActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_events, container, false);
-            textView = (TextView) rootView.findViewById(R.id.section_label);
+            textView = (MarkdownView) rootView.findViewById(R.id.section_label);
+
             if (!jsonArr.isEmpty()){
-                textView.setText(jsonArr.get(getArguments().getInt(ARG_SECTION_ID)));
+                textView.setMarkDownText(jsonArr.get(getArguments().getInt(ARG_SECTION_ID)));
             }else {
-                textView.setText("Loading...");
+                textView.setMarkDownText("Loading...");
             }
             return rootView;
         }
@@ -174,7 +222,12 @@ public class EventsActivity extends AppCompatActivity {
 
         protected void onPostExecute(JSONObject response){
             try {
-                JSONObject object =  (JSONObject) response.getJSONObject("data").getJSONArray("events").get(0);
+                JSONArray object = response.getJSONObject("data").getJSONArray("eventTabs");
+                TextView textView =  (TextView) findViewById(R.id.eventTitle);
+                textView.setText(response.getJSONObject("data").getString("name"));
+                textView = (TextView) findViewById(R.id.venue);
+                textView.setText(response.getJSONObject("data").getString("venue"));
+                dialPhone = ((JSONObject) response.getJSONObject("data").getJSONArray("assignees").get(0)).getString("phoneNumber");
                 saveResponse(object);
                 mSectionsPagerAdapter.addResponse(object);
             } catch (JSONException e) {
@@ -193,14 +246,14 @@ public class EventsActivity extends AppCompatActivity {
             super(fm);
         }
 
-        public void addResponse(JSONObject response){
+        public void addResponse(JSONArray response){
             int ind = 0;
             Iterator<PlaceholderFragment> iterator = mFragmentList.iterator();
             while(iterator.hasNext()) {
                 PlaceholderFragment fragment = iterator.next();
                 try {
                     if (fragment.textView != null) {
-                        fragment.textView.setText(response.getString(keyArray.get(ind)));
+                        fragment.textView.setMarkDownText(((JSONObject) response.get(keyArray.get(ind))).getString("info"));
                     }
                 }catch (Exception e){
                     e.printStackTrace();
