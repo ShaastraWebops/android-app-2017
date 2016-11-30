@@ -4,6 +4,7 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
@@ -23,7 +24,7 @@ import android.widget.Button;
 
 import shaastra.com.android_app_2017.feedback.FeedbackActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SponsorsFragment.OnFragmentInteractionListener {
 
 
     private String[] activityTitles;
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private FloatingActionButton fab;
     private NavigationView navigationView;
+    private boolean exit  = false;
 
     private boolean shouldLoadHomeFragOnBackPress = true;
 
@@ -326,5 +328,10 @@ public class MainActivity extends AppCompatActivity {
     public void eventActivity(MenuItem item){
         Intent intent = new Intent(this, EventsActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }

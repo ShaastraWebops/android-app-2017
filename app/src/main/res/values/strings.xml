@@ -139,4 +139,6 @@
     <string name="action_mark_all_read">Mark All as Read</string>
     <string name="privacy_policy">Privacy Policy</string>
     <string name="title_activity_about_us">AboutUsActivity</string>
+    <string name="first_start">Shaastra is the annual technical festival of the Indian Institute of Technology - Madras, Chennai, India. With an annual footfall of more than 40,000 visitors and participants, Shaastra is one of the biggest inter-college fests in Asia. It is the only student managed event in the world and the first ever festival to be ISO certified, which is a reflection of the students’ enthusiasm and passion to guarantee the highest standards of quality. Shaastra returns in its 18th edition, bringing with it an enriching experience of innovation, competition and learning that has become its hallmark over the years.</string>
+    <string name="first_start_button">Continue to app..</string>
 </resources>

@@ -65,9 +65,10 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name" />
         <activity
-            android:name="shaastra.com.android_app_2017.feedback.DisplayFeedback"
+            android:name=".feedback.DisplayFeedback"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name" />
+        <activity android:name=".BeforeMain"></activity>
     </application>
 
 </manifest>
