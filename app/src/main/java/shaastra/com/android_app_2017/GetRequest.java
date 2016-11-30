@@ -64,25 +64,37 @@ public class GetRequest extends AsyncTask<Object, Void, JSONArray>
            // jsonResponse.put("status", conn.getResponseCode());
 
             // Terminate the process if response code is not 2xx or OK
-            if (conn.getResponseCode()/100 != 2)
+           /* if (conn.getResponseCode()/100 != 2)
             {
 
                 conn.disconnect();
                 return null;
-            }
+            }*/
 
             InputStream iStream = conn.getInputStream();
             OutputStream oStream = new FileOutputStream(f);
             Utils.CopyStream(iStream, oStream);
             conn.disconnect();
 
+            Log.d("M1", String.valueOf(f));
+
             BufferedReader reader = new BufferedReader(new FileReader(f));
-            String line = reader.readLine();
+            String line = reader.readLine().trim();
             reader.close();
 
+            Log.d("LINE", line);
             if(line == null)
                 return null;
-            JSONArray array = new JSONArray(line);
+            JSONArray array=null;
+            JSONObject obj = null;
+
+            if(line.startsWith("{"))
+                line = "[" + line + "]";
+
+            array = new JSONArray(line);
+
+
+
             return array;
 
             // Processing the response
@@ -130,8 +142,10 @@ public class GetRequest extends AsyncTask<Object, Void, JSONArray>
             Log.d("COMES_HERE", "NO Connection");
             e.printStackTrace();
         }
-        catch ( IOException | JSONException e )
+        catch ( IOException e )
         {
+            e.printStackTrace();
+        } catch (JSONException e) {
             e.printStackTrace();
         }
         return null;

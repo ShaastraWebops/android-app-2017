@@ -59,7 +59,9 @@ public class GetActivity
         Log.d("CACHE_DIR", String.valueOf(context.getCacheDir()));
         try
         {
-            JSONArray obj = new GetRequest().execute(url, f, context).get();
+            JSONArray obj = null;
+            obj = new GetRequest().execute(url, f, context).get();
+            Log.d("Milestone 1", String.valueOf(obj));
             if(obj != null) {
                 textViews.put(url, obj);
                 return obj;
@@ -73,21 +75,29 @@ public class GetActivity
         try
         {
             BufferedReader reader = new BufferedReader(new FileReader(f));
-            line = reader.readLine();
+            line = reader.readLine().trim();
             Log.d("FILE_READ", line);
             reader.close();
         } catch (IOException e)
         {
             e.printStackTrace();
         }
-        JSONArray object = null;
+        JSONArray array = null;
+        JSONObject obj = null;
+
         try {
-            object = new JSONArray(line);
-        } catch (JSONException | NullPointerException e) {
+            if (line.startsWith("{"))
+                line = "[" + line + "]";
+
+            array = new JSONArray(line);
+        }
+        catch (JSONException e)
+        {
             e.printStackTrace();
         }
-        if( object != null)
-            return object;
+
+        if( array != null)
+            return array;
         Toast.makeText(context, "No Internet Connection. Connect to a Network", Toast.LENGTH_SHORT).show();
         return null;
     }

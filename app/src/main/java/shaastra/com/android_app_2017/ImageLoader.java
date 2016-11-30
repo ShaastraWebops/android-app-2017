@@ -58,7 +58,7 @@ public class ImageLoader {
         executorService.submit(new PhotosLoader(p));
     }
 
-    private Bitmap getBitmap(String url)
+    private Bitmap getBitmap(String url, int max_height)
     {
         File f = fCache.getFile(url);
         Bitmap b = decodeFile(f);
@@ -95,8 +95,7 @@ public class ImageLoader {
             BitmapFactory.Options o = new BitmapFactory.Options();
             o.inJustDecodeBounds = true;
             BitmapFactory.decodeStream(new FileInputStream(F), null, o);
-
-            final int REQUIRED_SIZE = 70;
+            int REQUIRED_SIZE = 70;
             int width_temp = o.outWidth, height_temp = o.outHeight;
             int scale = 1;
             while(true)
@@ -140,7 +139,8 @@ public class ImageLoader {
         {
             if(imageViewReused(photoToLoad))
                 return;
-            Bitmap bmp = getBitmap(photoToLoad.url);
+            photoToLoad.imageView.measure(0,0);
+            Bitmap bmp = getBitmap(photoToLoad.url, photoToLoad.imageView.getMeasuredHeight());
             if(imageViewReused(photoToLoad))
                 return;
             BitmapDisplayer bd = new BitmapDisplayer(bmp, photoToLoad);
