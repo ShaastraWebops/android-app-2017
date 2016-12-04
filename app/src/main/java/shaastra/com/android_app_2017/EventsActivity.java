@@ -190,7 +190,7 @@ public class EventsActivity extends AppCompatActivity {
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_events, container, false);
             textView = (MarkdownView) rootView.findViewById(R.id.section_label);
-
+            textView.setOpenUrlInBrowser(true);
             if (!jsonArr.isEmpty()){
                 textView.setMarkDownText(jsonArr.get(getArguments().getInt(ARG_SECTION_ID)));
             }else {
