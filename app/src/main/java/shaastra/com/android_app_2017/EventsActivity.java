@@ -3,6 +3,7 @@ package shaastra.com.android_app_2017;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.annotation.Nullable;
@@ -25,12 +26,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mukesh.MarkdownView;
-import com.roughike.bottombar.BottomBar;
-import com.roughike.bottombar.OnMenuTabSelectedListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -48,6 +48,7 @@ public class EventsActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private String dialPhone;
     private static ArrayList<String> jsonArr = new ArrayList<>(5);
+    private LinearLayout calllayout, sharelayout, locatelayout, bookmarklayout;
 
     //Array of json key in the order of the tabs
     public ArrayList <Integer> keyArray = new ArrayList<>();
@@ -55,6 +56,8 @@ public class EventsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        applytheme();
+        setTheme(R.style.AerofestTheme);
         setContentView(R.layout.activity_events);
         jsonArr.clear();
         dialPhone = null;
@@ -73,33 +76,44 @@ public class EventsActivity extends AppCompatActivity {
         if (toolbarLayout != null){
         }
 
-        //Initialising the Footer with Bootom Navigation bar
-        BottomBar bottomBar = (BottomBar) findViewById(R.id.bottombar);
-        bottomBar.setItemsFromMenu(R.menu.event_footer, new OnMenuTabSelectedListener() {
+        bookmarklayout = (LinearLayout) findViewById(R.id.bookmarkLayout);
+        locatelayout = (LinearLayout) findViewById(R.id.locationLayout);
+        calllayout = (LinearLayout) findViewById(R.id.callLayout);
+        sharelayout = (LinearLayout) findViewById(R.id.shareLayout);
+
+        bookmarklayout.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onMenuItemSelected(int menuItemId) {
-                switch (menuItemId) {
-                    case R.id.bookmark:
-                        Toast.makeText(getApplicationContext(), "Bookmark", Toast.LENGTH_SHORT).show();
-                        break;
-                    case R.id.locate:
-                        Toast.makeText(getApplicationContext(), "Bookmark", Toast.LENGTH_SHORT).show();
-                        break;
-                    case R.id.call:
-                        if (dialPhone != null) {
-                            Intent intent = new Intent(Intent.ACTION_DIAL);
-                            intent.setData(Uri.parse("tel:" + dialPhone));
-                            startActivity(intent);
-                        }else{
-                            Toast.makeText(getApplicationContext(), "Wait for Coordinator contact to Load", Toast.LENGTH_LONG).show();
-                        }
-                        break;
-                    case R.id.share:
-                        Toast.makeText(getApplicationContext(), "Bookmark", Toast.LENGTH_SHORT).show();
-                        break;
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Bookmarked", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        sharelayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Share", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        calllayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (dialPhone != null) {
+                    Intent intent = new Intent(Intent.ACTION_DIAL);
+                    intent.setData(Uri.parse("tel:" + dialPhone));
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(getApplicationContext(), "Wait for Coordinator contact to Load", Toast.LENGTH_LONG).show();
                 }
             }
         });
+        locatelayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Bookmark", Toast.LENGTH_SHORT).show();
+            }
+        });
+        //Initialising the Footer with Bootom Navigation bar
 
         //Assigning keyArray
         keyArray.add(0);
@@ -124,6 +138,10 @@ public class EventsActivity extends AppCompatActivity {
         //Setup Tablayout with viewPager
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
+        tabLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimaryAerofest));
+        tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.colorAccentAerofest));
+        tabLayout.setTabTextColors(Color.parseColor("#FFFFFF"), getResources().getColor(R.color.colorAccentAerofest));
+        findViewById(R.id.bottombar).setBackgroundColor(getResources().getColor(R.color.colorPrimaryAerofest));
 
         new FetchEventTask().execute("http://shaastra.org:8001/api/events/showWeb/57d43892a65edf661ac43909");
 

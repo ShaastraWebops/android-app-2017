@@ -10,6 +10,15 @@
         <item name="windowActionBar">false</item>
     </style>
 
+    <style name="AerofestTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimaryAerofest</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkAerofest</item>
+        <item name="colorAccent">@color/colorAccentAerofest</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+    </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
