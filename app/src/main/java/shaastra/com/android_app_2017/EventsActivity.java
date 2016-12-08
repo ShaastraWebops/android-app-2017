@@ -206,7 +206,7 @@ public class EventsActivity extends AppCompatActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_events, container, false);
+            View rootView = inflater.inflate(R.layout.fragment_event_details, container, false);
             textView = (MarkdownView) rootView.findViewById(R.id.section_label);
             textView.setOpenUrlInBrowser(true);
             if (!jsonArr.isEmpty()){
@@ -232,7 +232,7 @@ public class EventsActivity extends AppCompatActivity {
     class FetchEventTask extends AsyncTask<String, Void, JSONObject>{
 
         protected JSONObject doInBackground(String... urls){
-            response = GetRequest.execute(urls[0], null);
+            response = GetRequest.execute(urls[0], EventsActivity.this, null);
             Log.i("URL", urls[0]);
             Log.i("Response", String.valueOf(response));
             return response;

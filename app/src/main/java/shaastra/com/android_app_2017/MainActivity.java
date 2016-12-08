@@ -165,8 +165,9 @@ public class MainActivity extends AppCompatActivity {
 
             case 4:
                 // settings fragment
-                SponsorsFragment sponsorsFragment = new SponsorsFragment();
-                return sponsorsFragment;
+//                SponsorsFragment sponsorsFragment = new SponsorsFragment();
+                startActivity(new Intent(MainActivity.this, VerticalActivity.class));
+//                return sponsorsFragment;
             default:
                 return new HomeFragment();
         }
