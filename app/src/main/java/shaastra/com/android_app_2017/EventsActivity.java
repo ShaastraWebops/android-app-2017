@@ -2,9 +2,15 @@ package shaastra.com.android_app_2017;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -20,8 +26,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.mukesh.MarkdownView;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -35,40 +46,90 @@ public class EventsActivity extends AppCompatActivity {
     private ViewPager mViewPager;
     private JSONObject response;
     private TabLayout tabLayout;
-    private static ArrayList<String> jsonArr = new ArrayList<>(8);
+    private String dialPhone;
+    private static ArrayList<String> jsonArr = new ArrayList<>(5);
+    private LinearLayout calllayout, sharelayout, locatelayout, bookmarklayout;
 
     //Array of json key in the order of the tabs
-    public ArrayList <String> keyArray = new ArrayList<>();
+    public ArrayList <Integer> keyArray = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        applytheme();
+        setTheme(R.style.AerofestTheme);
         setContentView(R.layout.activity_events);
         jsonArr.clear();
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar1);
+        dialPhone = null;
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
+        //TODO Pass the event vertical as an extra to this activity
+        toolbar.setTitle("Event Vertical");
         setSupportActionBar(toolbar);
 
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+
+        CollapsingToolbarLayout toolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
+        if (toolbarLayout != null){
+        }
+
+        bookmarklayout = (LinearLayout) findViewById(R.id.bookmarkLayout);
+        locatelayout = (LinearLayout) findViewById(R.id.locationLayout);
+        calllayout = (LinearLayout) findViewById(R.id.callLayout);
+        sharelayout = (LinearLayout) findViewById(R.id.shareLayout);
+
+        bookmarklayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Bookmarked", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        sharelayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Share", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        calllayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (dialPhone != null) {
+                    Intent intent = new Intent(Intent.ACTION_DIAL);
+                    intent.setData(Uri.parse("tel:" + dialPhone));
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(getApplicationContext(), "Wait for Coordinator contact to Load", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        locatelayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Bookmark", Toast.LENGTH_SHORT).show();
+            }
+        });
+        //Initialising the Footer with Bootom Navigation bar
+
         //Assigning keyArray
-        keyArray.add("info");
-        keyArray.add("info");
-        keyArray.add("info");
-        keyArray.add("info");
-        keyArray.add("info");
-        keyArray.add("info");
-        keyArray.add("info");
-        keyArray.add("info");
+        keyArray.add(0);
+        keyArray.add(1);
+        keyArray.add(2);
+        keyArray.add(4);
+        keyArray.add(6);
 
         //Dynamically add fragments to the adapter
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         mSectionsPagerAdapter.addFragment(PlaceholderFragment.newInstance(0), "Home");
-        mSectionsPagerAdapter.addFragment(PlaceholderFragment.newInstance(1), "Event Format");
-        mSectionsPagerAdapter.addFragment(PlaceholderFragment.newInstance(2), "Problem Statement");
-        mSectionsPagerAdapter.addFragment(PlaceholderFragment.newInstance(3), "Registration");
-        mSectionsPagerAdapter.addFragment(PlaceholderFragment.newInstance(4), "Prize Money");
-        mSectionsPagerAdapter.addFragment(PlaceholderFragment.newInstance(5), "Resources");
-        mSectionsPagerAdapter.addFragment(PlaceholderFragment.newInstance(6), "FAQs");
-        mSectionsPagerAdapter.addFragment(PlaceholderFragment.newInstance(7), "Contact Us");
+        mSectionsPagerAdapter.addFragment(PlaceholderFragment.newInstance(1), "Format");
+        mSectionsPagerAdapter.addFragment(PlaceholderFragment.newInstance(2), "PS");
+        mSectionsPagerAdapter.addFragment(PlaceholderFragment.newInstance(3), "Prizes");
+        mSectionsPagerAdapter.addFragment(PlaceholderFragment.newInstance(4), "FAQ");
 
         //Setup adapter to viewPager
         mViewPager = (ViewPager) findViewById(R.id.container);
@@ -77,8 +138,12 @@ public class EventsActivity extends AppCompatActivity {
         //Setup Tablayout with viewPager
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
+        tabLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimaryAerofest));
+        tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.colorAccentAerofest));
+        tabLayout.setTabTextColors(Color.parseColor("#FFFFFF"), getResources().getColor(R.color.colorAccentAerofest));
+        findViewById(R.id.bottombar).setBackgroundColor(getResources().getColor(R.color.colorPrimaryAerofest));
 
-        new FetchEventTask().execute("http://shaastra.org:8001/api/eventLists/events/57ceccc4a65edf661ac430e4");
+        new FetchEventTask().execute("http://shaastra.org:8001/api/events/showWeb/57d43892a65edf661ac43909");
 
     }
 
@@ -104,11 +169,11 @@ public class EventsActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void saveResponse(JSONObject response){
+    public void saveResponse(JSONArray response){
         int ind = 0;
-        while(ind < 8) {
+        while(ind < 5) {
             try {
-                jsonArr.add(response.getString(keyArray.get(ind)));
+                jsonArr.add(((JSONObject) response.get(keyArray.get(ind))).getString("info"));
             }catch (Exception e){
                 e.printStackTrace();
             }finally {
@@ -123,7 +188,7 @@ public class EventsActivity extends AppCompatActivity {
         //Section Id to identify the fragment
         private static final String ARG_SECTION_ID = "section_id";
         //Textview in the fragment
-        public TextView textView;
+        public MarkdownView textView;
 
         public PlaceholderFragment() {
         }
@@ -142,11 +207,12 @@ public class EventsActivity extends AppCompatActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_events, container, false);
-            textView = (TextView) rootView.findViewById(R.id.section_label);
+            textView = (MarkdownView) rootView.findViewById(R.id.section_label);
+            textView.setOpenUrlInBrowser(true);
             if (!jsonArr.isEmpty()){
-                textView.setText(jsonArr.get(getArguments().getInt(ARG_SECTION_ID)));
+                textView.setMarkDownText(jsonArr.get(getArguments().getInt(ARG_SECTION_ID)));
             }else {
-                textView.setText("Loading...");
+                textView.setMarkDownText("Loading...");
             }
             return rootView;
         }
@@ -174,7 +240,12 @@ public class EventsActivity extends AppCompatActivity {
 
         protected void onPostExecute(JSONObject response){
             try {
-                JSONObject object =  (JSONObject) response.getJSONObject("data").getJSONArray("events").get(0);
+                JSONArray object = response.getJSONObject("data").getJSONArray("eventTabs");
+                TextView textView =  (TextView) findViewById(R.id.eventTitle);
+                textView.setText(response.getJSONObject("data").getString("name"));
+                textView = (TextView) findViewById(R.id.venue);
+                textView.setText(response.getJSONObject("data").getString("venue"));
+                dialPhone = ((JSONObject) response.getJSONObject("data").getJSONArray("assignees").get(0)).getString("phoneNumber");
                 saveResponse(object);
                 mSectionsPagerAdapter.addResponse(object);
             } catch (JSONException e) {
@@ -193,14 +264,14 @@ public class EventsActivity extends AppCompatActivity {
             super(fm);
         }
 
-        public void addResponse(JSONObject response){
+        public void addResponse(JSONArray response){
             int ind = 0;
             Iterator<PlaceholderFragment> iterator = mFragmentList.iterator();
             while(iterator.hasNext()) {
                 PlaceholderFragment fragment = iterator.next();
                 try {
                     if (fragment.textView != null) {
-                        fragment.textView.setText(response.getString(keyArray.get(ind)));
+                        fragment.textView.setMarkDownText(((JSONObject) response.get(keyArray.get(ind))).getString("info"));
                     }
                 }catch (Exception e){
                     e.printStackTrace();
