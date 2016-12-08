@@ -1,0 +1,49 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="shaastra.com.android_app_2017.ShowsFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="60sp"
+            android:id="@+id/shows_title"
+            android:src="@drawable/shows_title_banner"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/shows_text"
+            android:text="@string/shows_text"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="60sp"
+            android:id="@+id/envisage_title"
+            android:src="@drawable/subtitle_shows"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/envisage_text"
+            android:text="@string/envisage_text"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="60sp"
+            android:id="@+id/exhibitions_title"
+            android:src="@drawable/exhibitions_title_banner"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/exhibitions_text"/>
+    </LinearLayout>
+
+</FrameLayout>
