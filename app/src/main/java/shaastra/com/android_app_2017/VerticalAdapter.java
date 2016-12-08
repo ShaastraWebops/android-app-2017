@@ -17,9 +17,13 @@ import java.util.List;
 
 public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.viewHolder> {
     private List<VerticalItem> verticalList;
-    public VerticalAdapter(List<VerticalItem> list)
+    int themeres;
+    String verticalname;
+    public VerticalAdapter(List<VerticalItem> list, int themeres, String verticalname)
     {
         this.verticalList = list;
+        this.themeres = themeres;
+        this.verticalname = verticalname;
     }
 
 
@@ -31,8 +35,21 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.viewHo
 
     @Override
     public void onBindViewHolder(VerticalAdapter.viewHolder holder, int position) {
-        VerticalItem i = verticalList.get(position);
+        final VerticalItem i = verticalList.get(position);
         holder.iName.setText(i.getItemName());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                Context context = view.getContext();
+                Intent intent = new Intent(context, EventsActivity.class);
+                intent.putExtra("itemname", i.getItemName());
+                intent.putExtra("itemid", i.getItemid());
+                intent.putExtra("theme", themeres);
+                intent.putExtra("verticalname", verticalname);
+                view.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -40,7 +57,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.viewHo
         return verticalList.size();
     }
 
-    public class viewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
+    public class viewHolder extends RecyclerView.ViewHolder
     {
         public TextView iName;
         // public ImageView img;
@@ -48,18 +65,8 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.viewHo
         public viewHolder(View v)
         {
             super(v);
-            v.setOnClickListener(this);
             iName = (TextView) v.findViewById(R.id.itemName);
             //img = (ImageView) v.findViewById(R.id.itemImage);
-        }
-
-        @Override
-        public void onClick(View view)
-        {
-            Context context = view.getContext();
-            Intent i = new Intent(context, EventsActivity.class);
-            i.putExtra("Event", iName.getText());
-            view.getContext().startActivity(i);
         }
     }
 }

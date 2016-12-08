@@ -74,7 +74,8 @@
                 android:id="@+id/tabs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:theme="@style/AppTheme"
+                app:tabBackground="?colorPrimary"
+                app:tabIndicatorColor="?colorAccent"
                 app:tabMode="scrollable"
                 app:tabGravity="fill"/>
 

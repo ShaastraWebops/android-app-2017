@@ -1,6 +1,7 @@
 package shaastra.com.android_app_2017;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -27,26 +28,13 @@ import java.util.HashMap;
  */
 public class GetRequest {
     private static final String LOG_TAG = "GetRequest";
+    private static String MyPREFERENCES = "MyPREFERENCES";
 
 
     public static JSONObject execute(String mUrl, Context context, String token)  {
 
-        File file = new File(context.getFilesDir(), "data.dat");
-        HashMap<String, Object> map = new HashMap<>();
-        FileInputStream f = null;
-        try {
-            f = new FileInputStream(file);
-            ObjectInputStream s = new ObjectInputStream(f);
-            map = (HashMap<String, Object>) s.readObject();
-            Log.d("Map size", String.valueOf(map.size()));
-            s.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        SharedPreferences sharedpreferences = context.getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = context.getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE).edit();
 
         //Creating dummy response
         String responseBody;
@@ -55,8 +43,8 @@ public class GetRequest {
         try {
             jsonResponse.put("status", 980);
             String results = null;
-            if(map.containsKey(mUrl)) {
-                results = StringEscapeUtils.unescapeJava(map.get(mUrl).toString());
+            if(sharedpreferences.contains(mUrl)) {
+                results = sharedpreferences.getString(mUrl, null);
             }
             if (results!= null)
                 jsonResponse.put("data", new JSONObject(results));
@@ -79,9 +67,6 @@ public class GetRequest {
             // Terminate the process if response code is not 2xx or OK
             if (conn.getResponseCode()/100 != 2) {
                 conn.disconnect();
-                if (results!= null)
-                    jsonResponse.put("data", map.get(mUrl));
-                return jsonResponse;
             }
 
             // Processing the response
@@ -97,32 +82,25 @@ public class GetRequest {
                 try {
                     Log.d("Success", "1");
                     jsonResponse.put("data", new JSONObject(responseBody));
-                    map.put(url.toString(), responseBody);
-                    file = new File(context.getFilesDir(), "data.dat");
-//                    file = new File("data");
-                    ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(file));
-                    outputStream.writeObject(map);
-                    outputStream.flush();
-                    outputStream.close();
+                    editor.putString(mUrl, responseBody);
+                    editor.commit();
                     Log.d("Success", "written 1");
                 } catch (JSONException e){
                     Log.d("Success", "2");
                     jsonResponse.put("data", new JSONObject("{ \"response\":" + responseBody + "}"));
-                    map.put(url.toString(), "{ \"response\":" + responseBody + "}");
-//                    file = new File("data");
-                    file = new File(context.getFilesDir(), "data.dat");
-                    ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(file));
-                    outputStream.writeObject(map);
-                    outputStream.flush();
-                    outputStream.close();
+                    editor.putString(mUrl, "{ \"response\":" + responseBody + "}");
+                    editor.commit();
                     Log.d("Success", "written 2");                }
             }
             conn.disconnect();
         } catch (JSONException e){
+            Log.d("1","1");
             e.printStackTrace();
         } catch (MalformedURLException e){
+            Log.d("2","2");
             e.printStackTrace();
         } catch (IOException e){
+            Log.d("3","3");
             e.printStackTrace();
         }
 

@@ -2,8 +2,29 @@
 <resources>
     <color name="colorPrimary">#3E6B8F</color>
     <color name="colorPrimaryDark">#144064</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#FFEB3B</color>
     <color name="colorPrimaryAerofest">#F44336</color>
     <color name="colorPrimaryDarkAerofest">#D32F2F</color>
     <color name="colorAccentAerofest">#FFA000</color>
+    <color name="colorPrimaryBEvents">#4CAF50</color>
+    <color name="colorPrimaryDarkBEvents">#388E3C</color>
+    <color name="colorAccentBEvents">#FFEE58</color>
+    <color name="colorPrimaryCoding">#FB8C00</color>
+    <color name="colorPrimaryDarkCoding">#EF6C00</color>
+    <color name="colorAccentCoding">#26C6DA</color>
+    <color name="colorPrimaryDesignBuild">#03A9F4</color>
+    <color name="colorPrimaryDarkDesignBuild">#0288D1</color>
+    <color name="colorAccentDesignBuild">#FFCA28</color>
+    <color name="colorPrimaryElectronics">#EC407A</color>
+    <color name="colorPrimaryDarkElectronics">#D81B60</color>
+    <color name="colorAccentElectronics">#FFC107</color>
+    <color name="colorPrimaryInternational">#009688</color>
+    <color name="colorPrimaryDarkInternational">#00796B</color>
+    <color name="colorAccentInternational">#CDDC39</color>
+    <color name="colorPrimaryResearch">#795548</color>
+    <color name="colorPrimaryDarkResearch">#5D4037</color>
+    <color name="colorAccentResearch">#9CCC65</color>
+    <color name="colorPrimaryInvolve">#3F51B5</color>
+    <color name="colorPrimaryDarkInvolve">#303F9F</color>
+    <color name="colorAccentInvolve">#E91E63</color>
 </resources>

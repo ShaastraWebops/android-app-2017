@@ -57,7 +57,7 @@ public class EventsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        applytheme();
-        setTheme(R.style.AerofestTheme);
+        setTheme(getIntent().getIntExtra("theme", R.style.AppTheme));
         setContentView(R.layout.activity_events);
         jsonArr.clear();
         dialPhone = null;
@@ -66,6 +66,7 @@ public class EventsActivity extends AppCompatActivity {
         //TODO Pass the event vertical as an extra to this activity
         toolbar.setTitle("Event Vertical");
         setSupportActionBar(toolbar);
+        setTitle(getIntent().getStringExtra("verticalname"));
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -138,12 +139,7 @@ public class EventsActivity extends AppCompatActivity {
         //Setup Tablayout with viewPager
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
-        tabLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimaryAerofest));
-        tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.colorAccentAerofest));
-        tabLayout.setTabTextColors(Color.parseColor("#FFFFFF"), getResources().getColor(R.color.colorAccentAerofest));
-        findViewById(R.id.bottombar).setBackgroundColor(getResources().getColor(R.color.colorPrimaryAerofest));
-
-        new FetchEventTask().execute("http://shaastra.org:8001/api/events/showWeb/57d43892a65edf661ac43909");
+        new FetchEventTask().execute("http://shaastra.org:8001/api/events/showWeb/"+getIntent().getStringExtra("itemid"));
 
     }
 

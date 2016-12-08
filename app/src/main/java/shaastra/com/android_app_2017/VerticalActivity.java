@@ -23,16 +23,42 @@ public class VerticalActivity extends AppCompatActivity {
     private JSONObject response;
     public RecyclerView recyclerView;
     public VerticalAdapter adapter;
+    int themeres;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(getIntent().getStringExtra("listname").equalsIgnoreCase("Aerofest")) {
+            themeres = (R.style.AerofestTheme);
+        }
+        else if(getIntent().getStringExtra("listname").equalsIgnoreCase("B Events")) {
+            themeres = (R.style.BEventsTheme);
+        }
+        else if(getIntent().getStringExtra("listname").equalsIgnoreCase("Coding")) {
+            themeres = (R.style.CodingTheme);
+        }
+        else if(getIntent().getStringExtra("listname").equalsIgnoreCase("Design and Build")) {
+            themeres = (R.style.DesignBuildTheme);
+        }
+        else if(getIntent().getStringExtra("listname").equalsIgnoreCase("Electronics Fest")) {
+            themeres = (R.style.ElectronicsTheme);
+        }
+        else if(getIntent().getStringExtra("listname").equalsIgnoreCase("International Events")) {
+            themeres = (R.style.InternationalTheme);
+        }
+        else if(getIntent().getStringExtra("listname").equalsIgnoreCase("Involve and Quizzing")) {
+            themeres = (R.style.InvolveTheme);
+        }
+        else if(getIntent().getStringExtra("listname").equalsIgnoreCase("Research and Industrial Events")) {
+            themeres = (R.style.ResearchTheme);
+        }
+        setTheme(themeres);
         setContentView(R.layout.activity_vertical);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        setTitle(getIntent().getStringExtra("listname"));
 
-        Intent intent = getIntent();
-        String url = "http://shaastra.org:8001/api/eventLists/events/57ceccc4a65edf661ac430e4";
+        String url = "http://shaastra.org:8001/api/eventLists/events/"+getIntent().getStringExtra("listid");
         new FetchVerticalTask().execute(url);
 
 //        GetActivity g = new GetActivity(getApplicationContext());
@@ -80,7 +106,7 @@ public class VerticalActivity extends AppCompatActivity {
                 {
                     try {
                         JSONObject obj =(JSONObject) object.get(i);
-                        VerticalItem item = new VerticalItem((String) obj.get("name"));
+                        VerticalItem item = new VerticalItem(obj.getString("_id"), obj.getString("name"));
                         list.add(item);
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -90,7 +116,7 @@ public class VerticalActivity extends AppCompatActivity {
 //                TextView textView =  (TextView) findViewById(R.id.eventTitle);
 //                textView.setText(response.getJSONObject("data").getString("name"));
                 recyclerView = (RecyclerView) findViewById(R.id.verticals_view);
-                adapter = new VerticalAdapter(list);
+                adapter = new VerticalAdapter(list, themeres, getIntent().getStringExtra("listname"));
                 recyclerView.setLayoutManager(new LinearLayoutManager(VerticalActivity.this));
                 recyclerView.setAdapter(adapter);
             } catch (JSONException e) {

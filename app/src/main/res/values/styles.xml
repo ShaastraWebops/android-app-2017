@@ -19,6 +19,69 @@
         <item name="windowActionBar">false</item>
     </style>
 
+    <style name="BEventsTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimaryBEvents</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkBEvents</item>
+        <item name="colorAccent">@color/colorAccentBEvents</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+    </style>
+
+    <style name="CodingTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimaryCoding</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkCoding</item>
+        <item name="colorAccent">@color/colorAccentCoding</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+    </style>
+
+    <style name="DesignBuildTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimaryDesignBuild</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkDesignBuild</item>
+        <item name="colorAccent">@color/colorAccentDesignBuild</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+    </style>
+
+    <style name="ElectronicsTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimaryElectronics</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkElectronics</item>
+        <item name="colorAccent">@color/colorAccentElectronics</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+    </style>
+
+    <style name="InternationalTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimaryInternational</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkInternational</item>
+        <item name="colorAccent">@color/colorAccentInternational</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+    </style>
+
+    <style name="ResearchTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimaryResearch</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkResearch</item>
+        <item name="colorAccent">@color/colorAccentResearch</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+    </style>
+
+    <style name="InvolveTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimaryInvolve</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkInvolve</item>
+        <item name="colorAccent">@color/colorAccentInvolve</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+    </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
