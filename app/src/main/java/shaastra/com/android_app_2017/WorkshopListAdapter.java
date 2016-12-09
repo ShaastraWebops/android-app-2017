@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import java.util.List;
 
@@ -15,11 +14,11 @@ import java.util.List;
  * Created by gokulan on 27/11/16.
  */
 
-public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.viewHolder> {
+public class WorkshopListAdapter extends RecyclerView.Adapter<WorkshopListAdapter.viewHolder> {
     private List<EventListitem> verticalList;
     private Context context;
     private int[] imageresources;
-    public EventListAdapter(List<EventListitem> list, Context context, int[] imageresources)
+    public WorkshopListAdapter(List<EventListitem> list, Context context, int[] imageresources)
     {
         this.verticalList = list;
         this.context = context;
@@ -28,20 +27,20 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.view
 
 
     @Override
-    public EventListAdapter.viewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public WorkshopListAdapter.viewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_row, parent, false);
         return new viewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(EventListAdapter.viewHolder holder, int position) {
+    public void onBindViewHolder(WorkshopListAdapter.viewHolder holder, int position) {
         final EventListitem i = verticalList.get(position);
 //        holder.title1.setText(i.getItemName());
         holder.imageview.setImageDrawable(context.getResources().getDrawable(imageresources[position]));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context.getApplicationContext(), VerticalActivity.class);
+                Intent intent = new Intent(context.getApplicationContext(), WorkshopVerticalActivity.class);
                 intent.putExtra("listname", i.getItemName());
                 intent.putExtra("listid", i.getItemid());
                 context.startActivity(intent);

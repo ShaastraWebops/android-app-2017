@@ -53,6 +53,10 @@
         <activity
             android:name=".VerticalActivity"
             android:label="@string/title_activity_vertical"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".WorkshopVerticalActivity"
+            android:label="@string/title_activity_workshop_vertical"
             android:theme="@style/AppTheme"></activity>
     </application>
 

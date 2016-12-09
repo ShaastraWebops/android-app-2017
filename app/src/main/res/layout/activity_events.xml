@@ -76,6 +76,8 @@
                 android:layout_height="wrap_content"
                 app:tabBackground="?colorPrimary"
                 app:tabIndicatorColor="?colorAccent"
+                app:tabSelectedTextColor="?colorAccent"
+                app:tabTextColor="#FFFFFF"
                 app:tabMode="scrollable"
                 app:tabGravity="fill"/>
 

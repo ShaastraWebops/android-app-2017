@@ -91,9 +91,10 @@ public class EventsFragment extends Fragment {
                     }
                     i++;
                 }
-
+                int[] imageresources = new int[]{R.drawable.aerofest, R.drawable.b_events, R.drawable.coding, R.drawable.design_build,
+                        R.drawable.electronicsfest, R.drawable.internationalevents, R.drawable.involvequizzing, R.drawable.researchevents};
                 recyclerView = (RecyclerView) view.findViewById(R.id.recylerView);
-                adapter = new EventListAdapter(list, getContext());
+                adapter = new EventListAdapter(list, getContext(), imageresources);
                 recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
                 recyclerView.setAdapter(adapter);
             } catch (JSONException e) {
