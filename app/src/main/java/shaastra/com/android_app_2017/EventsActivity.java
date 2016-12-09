@@ -36,7 +36,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormatSymbols;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -47,11 +53,11 @@ public class EventsActivity extends AppCompatActivity {
     private JSONObject response;
     private TabLayout tabLayout;
     private String dialPhone;
-    private static ArrayList<String> jsonArr = new ArrayList<>(5);
+    private static HashMap<Integer, String> jsonArr = new HashMap<>(5);
     private LinearLayout calllayout, sharelayout, locatelayout, bookmarklayout;
 
-    //Array of json key in the order of the tabs
-    public ArrayList <Integer> keyArray = new ArrayList<>();
+
+    //public HashMap<Integer, String> keyArray = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,10 +69,9 @@ public class EventsActivity extends AppCompatActivity {
         dialPhone = null;
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
-        //TODO Pass the event vertical as an extra to this activity
-        toolbar.setTitle("Event Vertical");
+        toolbar.setTitle(getIntent().getStringExtra("verticalname"));
         setSupportActionBar(toolbar);
-        setTitle(getIntent().getStringExtra("verticalname"));
+        //setTitle(getIntent().getStringExtra("verticalname"));
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -117,11 +122,11 @@ public class EventsActivity extends AppCompatActivity {
         //Initialising the Footer with Bootom Navigation bar
 
         //Assigning keyArray
-        keyArray.add(0);
-        keyArray.add(1);
-        keyArray.add(2);
-        keyArray.add(4);
-        keyArray.add(6);
+//        keyArray.add("Home");
+//        keyArray.add("Event Format");
+//        keyArray.add("Problem Statement");
+//        keyArray.add("Prize Money");
+//        keyArray.add("FAQs");
 
         //Dynamically add fragments to the adapter
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -165,17 +170,28 @@ public class EventsActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void saveResponse(JSONArray response){
-        int ind = 0;
-        while(ind < 5) {
-            try {
-                jsonArr.add(((JSONObject) response.get(keyArray.get(ind))).getString("info"));
-            }catch (Exception e){
-                e.printStackTrace();
-            }finally {
-                ind++;
+    public void saveResponse(JSONArray response)throws JSONException{
+        int arrayIndex = 0;int tabInd;
+        ArrayList<String> arr = new ArrayList<>(5);
+        arr.add("Home");
+        arr.add("Event Format");
+        arr.add("Problem Statement");
+        arr.add("Prize Money");
+        arr.add("FAQs");
+        while (arrayIndex < response.length()){
+            tabInd = arr.indexOf(((JSONObject) response.get(arrayIndex)).getString("name"));
+            if (tabInd != -1){
+                jsonArr.put(tabInd, ((JSONObject) response.get(arrayIndex)).getString("info"));
             }
+            arrayIndex++;
         }
+    }
+
+    public String formatDate(String dateText){
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = format.parse(dateText.substring(0, 9), new ParsePosition(0));
+        if (date == null) return null;
+        return String.valueOf(date.getDate()) + " " + new DateFormatSymbols().getMonths()[date.getMonth()];
     }
 
     //A placeholder fragment containing a TextView.
@@ -205,10 +221,8 @@ public class EventsActivity extends AppCompatActivity {
             View rootView = inflater.inflate(R.layout.fragment_event_details, container, false);
             textView = (MarkdownView) rootView.findViewById(R.id.section_label);
             textView.setOpenUrlInBrowser(true);
-            if (!jsonArr.isEmpty()){
+            if (!jsonArr.isEmpty() && jsonArr.containsKey(getArguments().getInt(ARG_SECTION_ID))){
                 textView.setMarkDownText(jsonArr.get(getArguments().getInt(ARG_SECTION_ID)));
-            }else {
-                textView.setMarkDownText("Loading...");
             }
             return rootView;
         }
@@ -230,7 +244,7 @@ public class EventsActivity extends AppCompatActivity {
         protected JSONObject doInBackground(String... urls){
             response = GetRequest.execute(urls[0], EventsActivity.this, null);
             Log.i("URL", urls[0]);
-            Log.i("Response", String.valueOf(response));
+            //Log.i("Response", String.valueOf(response));
             return response;
         }
 
@@ -241,7 +255,16 @@ public class EventsActivity extends AppCompatActivity {
                 textView.setText(response.getJSONObject("data").getString("name"));
                 textView = (TextView) findViewById(R.id.venue);
                 textView.setText(response.getJSONObject("data").getString("venue"));
+
+                textView = (TextView) findViewById(R.id.date);
+                String dateText = response.getJSONObject("data").getString("eventDate");
+
+                String formattedDate = formatDate(dateText);
+                if (formattedDate != null)
+                    textView.setText(formatDate(dateText));
+
                 dialPhone = ((JSONObject) response.getJSONObject("data").getJSONArray("assignees").get(0)).getString("phoneNumber");
+                //setIndex(object);
                 saveResponse(object);
                 mSectionsPagerAdapter.addResponse(object);
             } catch (JSONException e) {
@@ -249,6 +272,22 @@ public class EventsActivity extends AppCompatActivity {
             }
         }
     }
+
+//    public void setIndex(JSONArray response) throws JSONException{
+//        int arrayIndex = 0;int tabInd;
+//        ArrayList<String> arr = new ArrayList<>(5);
+//        arr.add("Home");
+//        arr.add("Event Format");
+//        arr.add("Problem Statement");
+//        arr.add("Prize Money");
+//        arr.add("FAQs");
+//        while (arrayIndex < response.length()){
+//            tabInd = arr.indexOf(((JSONObject) response.get(arrayIndex)).getString("name"));
+//            if (tabInd != -1){
+//                keyArray.put(tabInd, ((JSONObject) response.get(arrayIndex)).getString("info"));
+//            }
+//        }
+//    }
 
     //Implementation of FragmentPagerAdapter which has FragmentList and FragmentTitleList
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
@@ -260,14 +299,15 @@ public class EventsActivity extends AppCompatActivity {
             super(fm);
         }
 
+        //The passes response is a jsonArray of eventTabs
         public void addResponse(JSONArray response){
             int ind = 0;
             Iterator<PlaceholderFragment> iterator = mFragmentList.iterator();
             while(iterator.hasNext()) {
                 PlaceholderFragment fragment = iterator.next();
                 try {
-                    if (fragment.textView != null) {
-                        fragment.textView.setMarkDownText(((JSONObject) response.get(keyArray.get(ind))).getString("info"));
+                    if (fragment.textView != null && jsonArr.containsKey(ind)) {
+                        fragment.textView.setMarkDownText(jsonArr.get(ind));
                     }
                 }catch (Exception e){
                     e.printStackTrace();
