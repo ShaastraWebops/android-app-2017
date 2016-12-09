@@ -53,7 +53,7 @@ public class EventsActivity extends AppCompatActivity {
     private JSONObject response;
     private TabLayout tabLayout;
     private String dialPhone;
-    private static HashMap<Integer, String> jsonArr = new HashMap<>(5);
+    private static HashMap<Integer, String> jsonArr = new HashMap<>();
     private LinearLayout calllayout, sharelayout, locatelayout, bookmarklayout;
 
 
@@ -131,11 +131,11 @@ public class EventsActivity extends AppCompatActivity {
         //Dynamically add fragments to the adapter
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
-        mSectionsPagerAdapter.addFragment(PlaceholderFragment.newInstance(0), "Home");
-        mSectionsPagerAdapter.addFragment(PlaceholderFragment.newInstance(1), "Format");
-        mSectionsPagerAdapter.addFragment(PlaceholderFragment.newInstance(2), "PS");
-        mSectionsPagerAdapter.addFragment(PlaceholderFragment.newInstance(3), "Prizes");
-        mSectionsPagerAdapter.addFragment(PlaceholderFragment.newInstance(4), "FAQ");
+//        mSectionsPagerAdapter.addFragment(PlaceholderFragment.newInstance(0), "Home");
+//        mSectionsPagerAdapter.addFragment(PlaceholderFragment.newInstance(1), "Format");
+//        mSectionsPagerAdapter.addFragment(PlaceholderFragment.newInstance(2), "PS");
+//        mSectionsPagerAdapter.addFragment(PlaceholderFragment.newInstance(3), "Prizes");
+//        mSectionsPagerAdapter.addFragment(PlaceholderFragment.newInstance(4), "FAQ");
 
         //Setup adapter to viewPager
         mViewPager = (ViewPager) findViewById(R.id.container);
@@ -170,21 +170,15 @@ public class EventsActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void saveResponse(JSONArray response)throws JSONException{
-        int arrayIndex = 0;int tabInd;
-        ArrayList<String> arr = new ArrayList<>(5);
-        arr.add("Home");
-        arr.add("Event Format");
-        arr.add("Problem Statement");
-        arr.add("Prize Money");
-        arr.add("FAQs");
-        while (arrayIndex < response.length()){
-            tabInd = arr.indexOf(((JSONObject) response.get(arrayIndex)).getString("name"));
-            if (tabInd != -1){
-                jsonArr.put(tabInd, ((JSONObject) response.get(arrayIndex)).getString("info"));
-            }
-            arrayIndex++;
+    public void saveResponse(JSONArray object)throws JSONException{
+        int tab = 0;
+        while (tab < object.length()){
+            mSectionsPagerAdapter.addFragment(PlaceholderFragment.newInstance(tab),
+                    ((JSONObject) object.get(tab)).getString("name"));
+            jsonArr.put(tab, ((JSONObject) object.get(tab)).getString("info"));
+            tab++;
         }
+        mSectionsPagerAdapter.notifyDataSetChanged();
     }
 
     public String formatDate(String dateText){
@@ -264,7 +258,6 @@ public class EventsActivity extends AppCompatActivity {
                     textView.setText(formatDate(dateText));
 
                 dialPhone = ((JSONObject) response.getJSONObject("data").getJSONArray("assignees").get(0)).getString("phoneNumber");
-                //setIndex(object);
                 saveResponse(object);
                 mSectionsPagerAdapter.addResponse(object);
             } catch (JSONException e) {
@@ -272,22 +265,6 @@ public class EventsActivity extends AppCompatActivity {
             }
         }
     }
-
-//    public void setIndex(JSONArray response) throws JSONException{
-//        int arrayIndex = 0;int tabInd;
-//        ArrayList<String> arr = new ArrayList<>(5);
-//        arr.add("Home");
-//        arr.add("Event Format");
-//        arr.add("Problem Statement");
-//        arr.add("Prize Money");
-//        arr.add("FAQs");
-//        while (arrayIndex < response.length()){
-//            tabInd = arr.indexOf(((JSONObject) response.get(arrayIndex)).getString("name"));
-//            if (tabInd != -1){
-//                keyArray.put(tabInd, ((JSONObject) response.get(arrayIndex)).getString("info"));
-//            }
-//        }
-//    }
 
     //Implementation of FragmentPagerAdapter which has FragmentList and FragmentTitleList
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
