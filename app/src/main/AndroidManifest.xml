@@ -59,7 +59,8 @@
         <activity android:name=".SummitSpeakers" />
         <activity android:name=".SummitRegistration" />
         <activity android:name=".SummitPartners" />
-        <activity android:name=".SummitPast"></activity>
+        <activity android:name=".SummitPast" />
+        <activity android:name=".SummitFAQ"></activity>
     </application>
 
 </manifest>
