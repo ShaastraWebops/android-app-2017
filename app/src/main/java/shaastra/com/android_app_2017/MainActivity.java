@@ -205,8 +205,8 @@ public class MainActivity extends AppCompatActivity {
                         CURRENT_TAG = TAG_WORKSHOPS;
                         break;
                     case R.id.summit:
-                        navItemIndex = 3;
-                        CURRENT_TAG = TAG_SUMMIT;
+                        startActivity(new Intent(MainActivity.this, SummitActivity.class));
+                        drawer.closeDrawers();
                         break;
                     case R.id.spons:
                         navItemIndex = 4;
