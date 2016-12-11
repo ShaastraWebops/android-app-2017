@@ -28,10 +28,12 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG_HOME = "home";
     private static final String TAG_EVENTS = "events";
     private static final String TAG_WORKSHOPS = "workshops";
+    private static final String TAG_SHOWS = "shows";
     private static final String TAG_SUMMIT = "summit";
     private static final String TAG_SPONSORS = "sponsors";
     private static final String TAG_ABOUTUS = "about us";
     public static String CURRENT_TAG = TAG_HOME;
+    public int idx = 0;
     private DrawerLayout drawer;
     private Handler mHandler;
     public static int navItemIndex = 0;
@@ -89,6 +91,12 @@ public class MainActivity extends AppCompatActivity {
             loadHomeFragment();
         }
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        navigationView.getMenu().findItem(idx).setChecked(true);
     }
 
     /***
@@ -160,14 +168,20 @@ public class MainActivity extends AppCompatActivity {
                 return workshopsFragment;
             case 3:
                 // notifications fragment
+                ShowsFragment showsFragment = new ShowsFragment();
+                return showsFragment;
+            case 4:
+                // notifications fragment
                 SummitFragment summitFragment = new SummitFragment();
                 return summitFragment;
 
-            case 4:
+            case 5:
                 // settings fragment
-//                SponsorsFragment sponsorsFragment = new SponsorsFragment();
-                startActivity(new Intent(MainActivity.this, VerticalActivity.class));
-//                return sponsorsFragment;
+                SponsorsFragment sponsorsFragment = new SponsorsFragment();
+//                startActivity(new Intent(MainActivity.this, VerticalActivity.class));
+                return sponsorsFragment;
+            case 6:
+                startActivity(new Intent(MainActivity.this, AboutUsActivity.class));
             default:
                 return new HomeFragment();
         }
@@ -178,7 +192,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void selectNavMenu() {
-        navigationView.getMenu().getItem(navItemIndex).setChecked(true);
+//        navigationView.getMenu().getItem(navItemIndex).setChecked(true);
     }
 
     private void setUpNavigationView() {
@@ -188,35 +202,54 @@ public class MainActivity extends AppCompatActivity {
             // This method will trigger on item Click of navigation menu
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
-
+//                idx = menuItem.getItemId();
                 //Check to see which item was being clicked and perform appropriate action
                 switch (menuItem.getItemId()) {
                     //Replacing the main content with ContentFragment Which is our Inbox View;
                     case R.id.home:
+                        idx = R.id.home;
                         navItemIndex = 0;
                         CURRENT_TAG = TAG_HOME;
                         break;
                     case R.id.events:
+                        idx = R.id.events;
                         navItemIndex = 1;
                         CURRENT_TAG = TAG_EVENTS;
                         break;
                     case R.id.work:
+                        idx = R.id.work;
                         navItemIndex = 2;
                         CURRENT_TAG = TAG_WORKSHOPS;
                         break;
-                    case R.id.summit:
+                    case R.id.shows:
+                        idx = R.id.shows;
                         navItemIndex = 3;
+                        CURRENT_TAG = TAG_SHOWS;
+                        break;
+//=======
+//                    case R.id.summit:
+//                        startActivity(new Intent(MainActivity.this, SummitActivity.class));
+//                        drawer.closeDrawers();
+////>>>>>>> Summit part1
+//                        break;
+                    case R.id.summit:
+                        idx = R.id.summit;
+                        navItemIndex = 4;
                         CURRENT_TAG = TAG_SUMMIT;
                         break;
                     case R.id.spons:
-                        navItemIndex = 4;
+                        idx = R.id.home;
+                        navItemIndex = 5;
                         CURRENT_TAG = TAG_SPONSORS;
                         break;
                     case R.id.about:
+                        navItemIndex = 6;
+                        CURRENT_TAG = TAG_ABOUTUS;
+                        break;
                         // launch new intent instead of loading fragment
-                        startActivity(new Intent(MainActivity.this, AboutUsActivity.class));
-                        drawer.closeDrawers();
-                        return true;
+//                        startActivity(new Intent(MainActivity.this, AboutUsActivity.class));
+//                        drawer.closeDrawers();
+//                        return true;
 //                    case R.id.nav_privacy_policy:
 //                        // launch new intent instead of loading fragment
 //                        startActivity(new Intent(MainActivity.this, PrivacyPolicyActivity.class));

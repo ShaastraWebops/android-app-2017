@@ -1,13 +1,110 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="shaastra.com.android_app_2017.SummitFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    android:layout_height="wrap_content">
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:weightSum="1">
 
-</FrameLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:id="@+id/summit_build"
+            android:src="@drawable/summit2" />
+
+        <ImageView
+                android:layout_width="150dp"
+                android:adjustViewBounds="true"
+                android:layout_marginLeft="10dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/summit_banner"
+                android:id="@+id/summit_banner"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/summit_main_para1"
+                android:textSize="17sp"
+                android:textColor="#000000"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="10dp"
+                android:id="@+id/summit_main_para1"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/summit_main_para2"
+            android:textSize="17sp"
+            android:textColor="#000000"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp"
+            android:id="@+id/summit_main_para2" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/summit_main_para4"
+            android:textSize="17sp"
+            android:textColor="#000000"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp"
+            android:id="@+id/summit_main_para4"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="To know more about International Accessibility Summit, please watch the teaser: https://www.youtube.com/watch?v=DT7H16f_1pU"
+                android:layout_below="@id/summit_main_para5"
+                android:textSize="17sp"
+                android:textColor="#000000"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="10dp"
+                android:autoLink="web"
+                android:textColorLink="#164165"
+                android:id="@+id/summit_teaser"/>
+
+            <GridLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:columnCount="2"
+                android:layout_gravity="center">
+            <ImageButton
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@drawable/summ_events"
+                android:id="@+id/summ_events"/>
+            <ImageButton
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@drawable/summ_speakers"
+                android:id="@+id/summ_speakers"/>
+            <ImageButton
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@drawable/summ_registration"
+                android:id="@+id/summ_registration"/>
+            <ImageButton
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@drawable/summ_partners"
+                android:id="@+id/summ_partners"/>
+            <ImageButton
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@drawable/summ_past_versions"
+                android:id="@+id/summ_past_versions"/>
+            <ImageButton
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@drawable/summ_faq"
+                android:id="@+id/summ_faq"/>
+            </GridLayout>
+    </LinearLayout>
+</ScrollView>

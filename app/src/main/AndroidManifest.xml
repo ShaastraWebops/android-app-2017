@@ -58,6 +58,14 @@
             android:name=".WorkshopVerticalActivity"
             android:label="@string/title_activity_workshop_vertical"
             android:theme="@style/AppTheme"></activity>
+        <activity android:name=".SummitActivity"></activity>
+        <activity android:name=".SummitEvents"></activity>
+        <activity android:name=".SummitSpeakers"></activity>
+        <activity android:name=".SummitRegistration" >
+        </activity>
+        <activity android:name=".SummitPartners"></activity>
+        <activity android:name=".SummitPast"></activity>
+        <activity android:name=".SummitFAQ"></activity>
     </application>
 
 </manifest>
