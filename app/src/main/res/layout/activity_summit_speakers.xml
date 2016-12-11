@@ -198,7 +198,166 @@
                     android:layout_marginTop="-10dp"
                     android:textColor="#333"
                     android:textSize="12sp"/>
+                <TextView
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/summit_speakers_para5"
+                    android:layout_below="@id/summit_speakers_para4"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:layout_marginTop="15dp"
+                    android:textColor="#000"
+                    android:layout_alignParentRight="true"
+                    android:id="@+id/summit_speakers_para5"/>
 
+                <FrameLayout
+                    android:id="@+id/frame5"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_alignTop="@+id/summit_speakers_para5"
+                    android:layout_toLeftOf="@+id/summit_speakers_para5"
+                    android:layout_marginTop="100dp">
+
+                    <ImageView
+                        android:id="@+id/pic5"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:src="@drawable/meenu" />
+
+                    <ImageView
+                        android:id="@+id/circle_crop5"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:src="@drawable/square_circle" />
+                </FrameLayout>
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:text="Meenu Bhambhani (Panelist) MphasiS, Bangalore"
+                    android:layout_below="@+id/frame5"
+                    android:layout_marginTop="-10dp"
+                    android:textColor="#333"
+                    android:textSize="12sp"/>
+                <TextView
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/summit_speakers_para6"
+                    android:layout_below="@id/summit_speakers_para5"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:layout_marginTop="15dp"
+                    android:textColor="#000"
+                    android:layout_alignParentRight="true"
+                    android:id="@+id/summit_speakers_para6"/>
+
+                <FrameLayout
+                    android:id="@+id/frame6"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_alignTop="@+id/summit_speakers_para6"
+                    android:layout_toLeftOf="@+id/summit_speakers_para6"
+                    android:layout_marginTop="100dp">
+
+                    <ImageView
+                        android:id="@+id/pic6"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:src="@drawable/rama" />
+
+                    <ImageView
+                        android:id="@+id/circle_crop6"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:src="@drawable/square_circle" />
+                </FrameLayout>
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:text="Rama Chari (Panelist) Diversity and Equal Opportunnities Centre"
+                    android:layout_below="@+id/frame6"
+                    android:layout_marginTop="-10dp"
+                    android:textColor="#333"
+                    android:textSize="12sp"/>
+                <TextView
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/summit_speakers_para7"
+                    android:layout_below="@id/summit_speakers_para6"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:layout_marginTop="15dp"
+                    android:textColor="#000"
+                    android:layout_alignParentRight="true"
+                    android:id="@+id/summit_speakers_para7"/>
+
+                <FrameLayout
+                    android:id="@+id/frame7"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_alignTop="@+id/summit_speakers_para7"
+                    android:layout_toLeftOf="@+id/summit_speakers_para7"
+                    android:layout_marginTop="100dp">
+
+                    <ImageView
+                        android:id="@+id/pic7"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:src="@drawable/moses" />
+
+                    <ImageView
+                        android:id="@+id/circle_crop7"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:src="@drawable/square_circle" />
+                </FrameLayout>
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:text="Moses Chowdary (Panelist) Enable India"
+                    android:layout_below="@+id/frame7"
+                    android:layout_marginTop="-10dp"
+                    android:textColor="#333"
+                    android:textSize="12sp"/>
+                <TextView
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/summit_speakers_para8"
+                    android:layout_below="@id/summit_speakers_para7"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:layout_marginTop="15dp"
+                    android:textColor="#000"
+                    android:layout_alignParentRight="true"
+                    android:id="@+id/summit_speakers_para8"/>
+
+                <FrameLayout
+                    android:id="@+id/frame8"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_alignTop="@+id/summit_speakers_para8"
+                    android:layout_toLeftOf="@+id/summit_speakers_para8"
+                    android:layout_marginTop="100dp">
+
+                    <ImageView
+                        android:id="@+id/pic8"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:src="@drawable/nirmita" />
+
+                    <ImageView
+                        android:id="@+id/circle_crop8"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:src="@drawable/square_circle" />
+                </FrameLayout>
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:text="Nirmita Narasimhan (Panel Moderator) Centre for Internet and Society"
+                    android:layout_below="@+id/frame8"
+                    android:layout_marginTop="-10dp"
+                    android:textColor="#333"
+                    android:textSize="12sp"/>
 
             </RelativeLayout>
         </LinearLayout>
