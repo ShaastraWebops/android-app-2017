@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="shaastra.com.android_app_2017.SummitFAQ">
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-30dp"
+                android:layout_marginBottom="20dp">
+
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/summit_banner"
+                    android:id="@+id/summit_banner"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="FAQ"
+                    android:layout_below="@+id/summit_banner"
+                    android:layout_marginTop="-55dp"
+                    android:id="@+id/summ_FAQ_title"
+                    android:textSize="20dp"
+                    android:textColor="#000"
+                    android:textStyle="bold"
+                    android:layout_centerHorizontal="true"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/summit_FAQ_q1"
+                    android:layout_below="@id/summ_FAQ_title"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:layout_marginTop="15dp"
+                    android:textColor="#000"
+                    android:id="@+id/summit_FAQ_q1"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/summit_FAQ_a1"
+                    android:layout_below="@id/summit_FAQ_q1"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:layout_marginTop="5dp"
+                    android:textColor="#000"
+                    android:id="@+id/summit_FAQ_a1"/>
+                <TextView
+                    android:layout_width="180dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/summit_FAQ_q2"
+                    android:paddingLeft="5dp"
+                    android:layout_below="@id/summit_FAQ_a1"
+                    android:layout_marginTop="15dp"
+                    android:textColor="#000"
+                    android:id="@+id/summit_FAQ_q2" />
+                <TextView
+                    android:layout_width="180dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/summit_FAQ_a2"
+                    android:paddingLeft="5dp"
+                    android:layout_below="@id/summit_FAQ_q2"
+                    android:layout_marginTop="5dp"
+                    android:textColor="#000"
+                    android:id="@+id/summit_FAQ_a2" />
+                <ImageView
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/summit_build"
+                    android:src="@drawable/summit2"
+                    android:layout_toRightOf="@+id/summit_FAQ_a2"
+                    android:layout_below="@+id/summit_FAQ_a1"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/summit_FAQ_q3"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:layout_below="@id/summit_FAQ_a2"
+                    android:layout_marginTop="15dp"
+                    android:textColor="#000"
+                    android:id="@+id/summit_FAQ_q3" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/summit_FAQ_a3"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:layout_below="@id/summit_FAQ_q3"
+                    android:layout_marginTop="5dp"
+                    android:textColor="#000"
+                    android:id="@+id/summit_FAQ_a3" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/summit_FAQ_q4"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:layout_below="@id/summit_FAQ_a3"
+                    android:layout_marginTop="15dp"
+                    android:textColor="#000"
+                    android:id="@+id/summit_FAQ_q4" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/summit_FAQ_a4"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:layout_below="@id/summit_FAQ_q4"
+                    android:layout_marginTop="5dp"
+                    android:textColor="#000"
+                    android:id="@+id/summit_FAQ_a4" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/summit_FAQ_q5"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:layout_below="@id/summit_FAQ_a4"
+                    android:layout_marginTop="15dp"
+                    android:textColor="#000"
+                    android:id="@+id/summit_FAQ_q5" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/summit_FAQ_a5"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:layout_below="@id/summit_FAQ_q5"
+                    android:layout_marginTop="5dp"
+                    android:textColor="#000"
+                    android:id="@+id/summit_FAQ_a5" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/summit_FAQ_q6"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:layout_below="@id/summit_FAQ_a5"
+                    android:layout_marginTop="15dp"
+                    android:textColor="#000"
+                    android:id="@+id/summit_FAQ_q6" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/summit_FAQ_a6"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:layout_below="@id/summit_FAQ_q6"
+                    android:layout_marginTop="5dp"
+                    android:textColor="#000"
+                    android:id="@+id/summit_FAQ_a6" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/summit_FAQ_q7"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:layout_below="@id/summit_FAQ_a6"
+                    android:layout_marginTop="15dp"
+                    android:textColor="#000"
+                    android:id="@+id/summit_FAQ_q7" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/summit_FAQ_a7"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:layout_below="@id/summit_FAQ_q7"
+                    android:layout_marginTop="5dp"
+                    android:textColor="#000"
+                    android:id="@+id/summit_FAQ_a7" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/summit_FAQ_q8"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:layout_below="@id/summit_FAQ_a7"
+                    android:layout_marginTop="15dp"
+                    android:textColor="#000"
+                    android:id="@+id/summit_FAQ_q8" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/summit_FAQ_a8"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:layout_below="@id/summit_FAQ_q8"
+                    android:layout_marginTop="5dp"
+                    android:textColor="#000"
+                    android:id="@+id/summit_FAQ_a8" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/summit_FAQ_q9"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:layout_below="@id/summit_FAQ_a8"
+                    android:layout_marginTop="15dp"
+                    android:textColor="#000"
+                    android:id="@+id/summit_FAQ_q9" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/summit_FAQ_a9"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:layout_below="@id/summit_FAQ_q9"
+                    android:layout_marginTop="5dp"
+                    android:textColor="#000"
+                    android:id="@+id/summit_FAQ_a9" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/summit_FAQ_q10"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:layout_below="@id/summit_FAQ_a9"
+                    android:layout_marginTop="15dp"
+                    android:textColor="#000"
+                    android:id="@+id/summit_FAQ_q10" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/summit_FAQ_a10"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:layout_below="@id/summit_FAQ_q10"
+                    android:layout_marginTop="5dp"
+                    android:textColor="#000"
+                    android:id="@+id/summit_FAQ_a10" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/summit_FAQ_q11"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:layout_below="@id/summit_FAQ_a10"
+                    android:layout_marginTop="15dp"
+                    android:textColor="#000"
+                    android:id="@+id/summit_FAQ_q11" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/summit_FAQ_a11"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:layout_below="@id/summit_FAQ_q11"
+                    android:layout_marginTop="5dp"
+                    android:textColor="#000"
+                    android:id="@+id/summit_FAQ_a11" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/summit_FAQ_q12"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:layout_below="@id/summit_FAQ_a11"
+                    android:layout_marginTop="15dp"
+                    android:textColor="#000"
+                    android:id="@+id/summit_FAQ_q12" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/summit_FAQ_a12"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:layout_below="@id/summit_FAQ_q12"
+                    android:layout_marginTop="5dp"
+                    android:textColor="#000"
+                    android:id="@+id/summit_FAQ_a12" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/summit_FAQ_q13"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:layout_below="@id/summit_FAQ_a12"
+                    android:layout_marginTop="15dp"
+                    android:textColor="#000"
+                    android:id="@+id/summit_FAQ_q13" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/summit_FAQ_a13"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:layout_below="@id/summit_FAQ_q13"
+                    android:layout_marginTop="5dp"
+                    android:textColor="#000"
+                    android:id="@+id/summit_FAQ_a13" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/summit_FAQ_q14"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:layout_below="@id/summit_FAQ_a13"
+                    android:layout_marginTop="15dp"
+                    android:textColor="#000"
+                    android:id="@+id/summit_FAQ_q14" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/summit_FAQ_a14"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:layout_below="@id/summit_FAQ_q14"
+                    android:layout_marginTop="5dp"
+                    android:textColor="#000"
+                    android:id="@+id/summit_FAQ_a14" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/summit_FAQ_q15"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:layout_below="@id/summit_FAQ_a14"
+                    android:layout_marginTop="15dp"
+                    android:textColor="#000"
+                    android:id="@+id/summit_FAQ_q15" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/summit_FAQ_a15"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:layout_below="@id/summit_FAQ_q15"
+                    android:layout_marginTop="5dp"
+                    android:textColor="#000"
+                    android:id="@+id/summit_FAQ_a15" />
+
+
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>
