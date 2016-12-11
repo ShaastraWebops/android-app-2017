@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG_HOME = "home";
     private static final String TAG_EVENTS = "events";
     private static final String TAG_WORKSHOPS = "workshops";
+    private static final String TAG_SHOWS = "shows";
     private static final String TAG_SUMMIT = "summit";
     private static final String TAG_SPONSORS = "sponsors";
     private static final String TAG_ABOUTUS = "about us";
@@ -221,9 +222,10 @@ public class MainActivity extends AppCompatActivity {
                         CURRENT_TAG = TAG_WORKSHOPS;
                         break;
                     case R.id.shows:
-                        idx = R.id.summit;
+                        idx = R.id.shows;
                         navItemIndex = 3;
-                        CURRENT_TAG = TAG_SUMMIT;
+                        CURRENT_TAG = TAG_SHOWS;
+                        break;
 //=======
 //                    case R.id.summit:
 //                        startActivity(new Intent(MainActivity.this, SummitActivity.class));
@@ -234,6 +236,7 @@ public class MainActivity extends AppCompatActivity {
                         idx = R.id.summit;
                         navItemIndex = 4;
                         CURRENT_TAG = TAG_SUMMIT;
+                        break;
                     case R.id.spons:
                         idx = R.id.home;
                         navItemIndex = 5;
