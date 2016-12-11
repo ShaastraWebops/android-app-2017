@@ -55,7 +55,8 @@
             android:label="@string/title_activity_vertical"
             android:theme="@style/AppTheme" />
         <activity android:name=".SummitActivity" />
-        <activity android:name=".SummitEvents"></activity>
+        <activity android:name=".SummitEvents" />
+        <activity android:name=".SummitSpeakers"></activity>
     </application>
 
 </manifest>
