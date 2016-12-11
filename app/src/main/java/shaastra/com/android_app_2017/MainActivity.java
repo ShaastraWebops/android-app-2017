@@ -220,11 +220,17 @@ public class MainActivity extends AppCompatActivity {
                         navItemIndex = 2;
                         CURRENT_TAG = TAG_WORKSHOPS;
                         break;
+//<<<<<<< 193eedf787203fc4bf23a1c9d925d1744e4c7997
                     case R.id.shows:
                         idx = R.id.summit;
                         navItemIndex = 3;
                         CURRENT_TAG = TAG_SUMMIT;
-                        break;
+//=======
+//                    case R.id.summit:
+//                        startActivity(new Intent(MainActivity.this, SummitActivity.class));
+//                        drawer.closeDrawers();
+////>>>>>>> Summit part1
+//                        break;
                     case R.id.summit:
                         idx = R.id.summit;
                         navItemIndex = 4;
