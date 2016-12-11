@@ -220,7 +220,6 @@ public class MainActivity extends AppCompatActivity {
                         navItemIndex = 2;
                         CURRENT_TAG = TAG_WORKSHOPS;
                         break;
-//<<<<<<< 193eedf787203fc4bf23a1c9d925d1744e4c7997
                     case R.id.shows:
                         idx = R.id.summit;
                         navItemIndex = 3;
@@ -235,7 +234,6 @@ public class MainActivity extends AppCompatActivity {
                         idx = R.id.summit;
                         navItemIndex = 4;
                         CURRENT_TAG = TAG_SUMMIT;
-                        break;
                     case R.id.spons:
                         idx = R.id.home;
                         navItemIndex = 5;
