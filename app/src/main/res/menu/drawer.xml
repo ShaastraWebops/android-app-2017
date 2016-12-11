@@ -24,6 +24,13 @@
             android:textAppearance="?android:attr/textAppearanceMedium"/>
 
         <item
+            android:id="@+id/shows"
+            android:checked="false"
+            android:title="@string/shows_string"
+            android:icon="@drawable/summit"
+            android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+        <item
             android:id="@+id/summit"
             android:checked="false"
             android:title="@string/summit_string"

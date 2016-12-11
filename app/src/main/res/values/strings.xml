@@ -4,6 +4,7 @@
     <string name="home_string">Home</string>
     <string name="events_string">Events</string>
     <string name="workshops_string">Workshops</string>
+    <string name="shows_string">Shows</string>
     <string name="summit_string">Summit</string>
     <string name="sponsors_string">Sponsors</string>
     <string name="aboutus_string">About Us</string>
@@ -21,6 +22,7 @@
         <item>Home</item>
         <item>Events</item>
         <item>Workshops</item>
+        <item>Shows</item>
         <item>Summit</item>
         <item>Sponsors</item>
         <item>About Us</item>
@@ -37,4 +39,9 @@
     <string name="title_item_detail">Item Detail</string>
     <string name="title_activity_vertical">VerticalActivity</string>
     <string name="title_activity_workshop_vertical">WorkshopVerticalActivity</string>
+
+    <string name="shows_text">Coming Soon! Stay tuned for updates!</string>
+    <string name="envisage_text">Shaastra introduced a technologically aided cultural show 5 years ago - Envisage; which is one of its kind in India. Envisage is a technical marvel as the fusion of art and technology that pleasures your visual senses and overwhelms you with audio effects. Have you ever seen creating images and patterns out of flowing water? Have you ever seen music coming out of empty hands? Have you ever seen a guy dancing turns into amazing graphics? Envisage-5.0 brings you all of it. You are going to feel the pinnacle of entertainment with fascinating technology involved through our projects. It is going to be an exciting and exhilarating experience. Feast your eyes and ears on the enticing projects coming together as a show completely run by students of IIT Madras. After four successful editions of Envisage, this year Shaastra 2017 presents you Envisage-5.0 on Day 1, which is going to be more bigger and better.</string>
+    <string name="exhibitions_text">Coming Soon! Stay tuned for updates!</string>
+
 </resources>

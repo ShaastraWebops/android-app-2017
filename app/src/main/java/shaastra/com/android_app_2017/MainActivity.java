@@ -167,15 +167,19 @@ public class MainActivity extends AppCompatActivity {
                 return workshopsFragment;
             case 3:
                 // notifications fragment
+                ShowsFragment showsFragment = new ShowsFragment();
+                return showsFragment;
+            case 4:
+                // notifications fragment
                 SummitFragment summitFragment = new SummitFragment();
                 return summitFragment;
 
-            case 4:
+            case 5:
                 // settings fragment
                 SponsorsFragment sponsorsFragment = new SponsorsFragment();
 //                startActivity(new Intent(MainActivity.this, VerticalActivity.class));
                 return sponsorsFragment;
-            case 5:
+            case 6:
                 startActivity(new Intent(MainActivity.this, AboutUsActivity.class));
             default:
                 return new HomeFragment();
@@ -216,18 +220,23 @@ public class MainActivity extends AppCompatActivity {
                         navItemIndex = 2;
                         CURRENT_TAG = TAG_WORKSHOPS;
                         break;
-                    case R.id.summit:
+                    case R.id.shows:
                         idx = R.id.summit;
                         navItemIndex = 3;
                         CURRENT_TAG = TAG_SUMMIT;
                         break;
+                    case R.id.summit:
+                        idx = R.id.summit;
+                        navItemIndex = 4;
+                        CURRENT_TAG = TAG_SUMMIT;
+                        break;
                     case R.id.spons:
                         idx = R.id.home;
-                        navItemIndex = 4;
+                        navItemIndex = 5;
                         CURRENT_TAG = TAG_SPONSORS;
                         break;
                     case R.id.about:
-                        navItemIndex = 5;
+                        navItemIndex = 6;
                         CURRENT_TAG = TAG_ABOUTUS;
                         break;
                         // launch new intent instead of loading fragment
