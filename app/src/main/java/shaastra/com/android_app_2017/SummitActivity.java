@@ -33,4 +33,9 @@ public class SummitActivity extends AppCompatActivity {
         Intent intent = new Intent(SummitActivity.this, SummitPartners.class);
         startActivity(intent);
     }
+    public void summ_past_but(View v)
+    {
+        Intent intent = new Intent(SummitActivity.this, SummitPast.class);
+        startActivity(intent);
+    }
 }

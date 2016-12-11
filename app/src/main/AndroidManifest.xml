@@ -64,6 +64,7 @@
         <activity android:name=".SummitRegistration" >
         </activity>
         <activity android:name=".SummitPartners"></activity>
+        <activity android:name=".SummitPast"></activity>
     </application>
 
 </manifest>
