@@ -55,6 +55,7 @@ public class EventsActivity extends AppCompatActivity {
     private String dialPhone;
     private static HashMap<Integer, String> jsonArr = new HashMap<>();
     private LinearLayout calllayout, sharelayout, locatelayout, bookmarklayout;
+    private String venue;
 
 
     //public HashMap<Integer, String> keyArray = new HashMap<>();
@@ -116,7 +117,10 @@ public class EventsActivity extends AppCompatActivity {
         locatelayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Bookmark", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), "Bookmark", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(EventsActivity.this, MapsActivity.class);
+                intent.putExtra("location", venue);
+                startActivity(intent);
             }
         });
         //Initialising the Footer with Bootom Navigation bar
@@ -164,6 +168,10 @@ public class EventsActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            return true;
+        }
+        else if(id == android.R.id.home) {
+            finish();
             return true;
         }
 
@@ -249,7 +257,7 @@ public class EventsActivity extends AppCompatActivity {
                 textView.setText(response.getJSONObject("data").getString("name"));
                 textView = (TextView) findViewById(R.id.venue);
                 textView.setText(response.getJSONObject("data").getString("venue"));
-
+                venue = response.getJSONObject("data").getString("venue");
                 textView = (TextView) findViewById(R.id.date);
                 String dateText = response.getJSONObject("data").getString("eventDate");
 

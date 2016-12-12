@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Android-app-2017</string>
+    <string name="app_name">Shaastra 2017</string>
     <string name="action_settings">Settings</string>
     <string name="home_string">Home</string>
     <string name="events_string">Events</string>
@@ -24,6 +24,7 @@
         <item>Workshops</item>
         <item>Shows</item>
         <item>Summit</item>
+        <item>Map</item>
         <item>Sponsors</item>
         <item>About Us</item>
     </string-array>
@@ -109,4 +110,6 @@
     <string name="summit_FAQ_a14">Participants are not required to come to Chennai before the summit. The interview will be conducted over Skype or telephone.</string>
     <string name="summit_FAQ_q15">15. <b>I have a lot of queries, how do I get in touch with the you?</b></string>
     <string name="summit_FAQ_a15">You can contact us at the email address - summitregistrations@shaastra.org. You can also contact Udith Krishna at udithkrishna@shaastra.org and Ramprashanth M at ramprashanth@shaastra.org.</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="map_string">Map</string>
 </resources>
