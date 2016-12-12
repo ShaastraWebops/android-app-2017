@@ -27,7 +27,7 @@
             android:id="@+id/shows"
             android:checked="false"
             android:title="@string/shows_string"
-            android:icon="@drawable/summit"
+            android:icon="@drawable/summit_icon"
             android:textAppearance="?android:attr/textAppearanceMedium"/>
 
         <item
@@ -35,6 +35,12 @@
             android:checked="false"
             android:title="@string/summit_string"
             android:icon="@drawable/summit"
+            android:textAppearance="?android:attr/textAppearanceMedium"/>
+        <item
+            android:id="@+id/map"
+            android:checked="false"
+            android:title="@string/map_string"
+            android:icon="@drawable/map_icon"
             android:textAppearance="?android:attr/textAppearanceMedium"/>
         </group>
 

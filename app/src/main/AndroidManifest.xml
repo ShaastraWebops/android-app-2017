@@ -3,8 +3,8 @@
     package="shaastra.com.android_app_2017">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -57,15 +57,29 @@
         <activity
             android:name=".WorkshopVerticalActivity"
             android:label="@string/title_activity_workshop_vertical"
-            android:theme="@style/AppTheme"></activity>
-        <activity android:name=".SummitActivity"></activity>
-        <activity android:name=".SummitEvents"></activity>
-        <activity android:name=".SummitSpeakers"></activity>
-        <activity android:name=".SummitRegistration" >
-        </activity>
-        <activity android:name=".SummitPartners"></activity>
-        <activity android:name=".SummitPast"></activity>
-        <activity android:name=".SummitFAQ"></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".SummitActivity" />
+        <activity android:name=".SummitEvents" />
+        <activity android:name=".SummitSpeakers" />
+        <activity android:name=".SummitRegistration" />
+        <activity android:name=".SummitPartners" />
+        <activity android:name=".SummitPast" />
+        <activity android:name=".SummitFAQ" />
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/. 
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <activity
+            android:name=".MapsActivity"
+            android:label="@string/title_activity_maps"></activity>
     </application>
 
 </manifest>
