@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <group android:checkableBehavior="single" android:id="@+id/group1">
+    <group android:checkableBehavior="single" >
 
         <item
             android:id="@+id/home"
@@ -42,26 +42,28 @@
             android:title="@string/map_string"
             android:icon="@drawable/map_icon"
             android:textAppearance="?android:attr/textAppearanceMedium"/>
-        </group>
+        <!--</group>-->
 
-        <item android:title="Other">
+        <item
+            android:id="@+id/other"
+            android:title="Other">
             <menu>
-                <group android:checkableBehavior="single" android:id="@+id/group2">
+                <!--<group android:checkableBehavior="single">-->
                     <item
-                        android:id="@+id/spons"
+                        android:id="@+id/feedback"
                         android:checked="false"
-                        android:title="@string/sponsors_string"
-                        android:icon="@drawable/spons"
+                        android:title="@string/feedback_string"
+                        android:icon="@drawable/feedback"
                         android:textAppearance="?android:attr/textAppearanceMedium"/>
                     <item
-                        android:id="@+id/about"
+                        android:id="@+id/qrscanner"
                         android:checked="false"
-                        android:title="@string/aboutus_string"
-                        android:icon="@drawable/about"
+                        android:title="@string/qr_string"
+                        android:icon="@drawable/qr"
                         android:textAppearance="?android:attr/textAppearanceMedium"/>
-                </group>
+                <!--</group>-->
             </menu>
         </item>
 
-    <!--</group>-->
+    </group>
 </menu>

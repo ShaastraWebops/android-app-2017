@@ -112,4 +112,6 @@
     <string name="summit_FAQ_a15">You can contact us at the email address - summitregistrations@shaastra.org. You can also contact Udith Krishna at udithkrishna@shaastra.org and Ramprashanth M at ramprashanth@shaastra.org.</string>
     <string name="title_activity_maps">Map</string>
     <string name="map_string">Map</string>
+    <string name="feedback_string">Feedback</string>
+    <string name="qr_string">QR Scanner</string>
 </resources>

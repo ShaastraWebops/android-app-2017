@@ -19,11 +19,15 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG_SPONSORS = "sponsors";
     private static final String TAG_ABOUTUS = "about us";
     public static String CURRENT_TAG = TAG_HOME;
-    public int idx = 0;
+//    public int idx;
     private DrawerLayout drawer;
     private Handler mHandler;
     public static int navItemIndex = 0;
@@ -53,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+//        idx = R.id.home;
         toolbar = (Toolbar) findViewById(R.id.toolbar);
 
 
@@ -102,7 +107,23 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        navigationView.getMenu().findItem(idx).setChecked(true);
+        navigationView.getMenu().getItem(navItemIndex).setChecked(true);
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if(result != null) {
+            if(result.getContents() == null) {
+                Log.d("MainActivity", "Cancelled scan");
+                Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
+            } else {
+                Log.d("MainActivity", "Scanned");
+                Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
+            }
+        } else {
+            // This is important, otherwise the result will not be passed to the fragment
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
     /***
@@ -114,9 +135,9 @@ public class MainActivity extends AppCompatActivity {
         selectNavMenu();
 
         // set toolbar title
-        if(navItemIndex != 5) {
+//        if(navItemIndex != 5) {
             setToolbarTitle();
-        }
+//        }
 
         // if user select the current navigation menu again, don't do anything
         // just close the navigation drawer
@@ -156,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
                         // Should we show an explanation?
                     }
                     else {
-                        startActivity(new Intent(MainActivity.this, MapsActivity.class));
+//                        startActivity(new Intent(MainActivity.this, MapsActivity.class));
                     }
                 }
             }
@@ -185,7 +206,7 @@ public class MainActivity extends AppCompatActivity {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    startActivity(new Intent(MainActivity.this, MapsActivity.class));
+//                    startActivity(new Intent(MainActivity.this, MapsActivity.class));
 
                     // permission was granted, yay! Do the
                     // contacts-related task you need to do.
@@ -231,11 +252,9 @@ public class MainActivity extends AppCompatActivity {
 
             case 6:
                 // settings fragment
-                SponsorsFragment sponsorsFragment = new SponsorsFragment();
+                FeedbackFragment feedbackFragment = new FeedbackFragment();
 //                startActivity(new Intent(MainActivity.this, VerticalActivity.class));
-                return sponsorsFragment;
-            case 7:
-                startActivity(new Intent(MainActivity.this, AboutUsActivity.class));
+                return feedbackFragment;
             default:
                 return new HomeFragment();
         }
@@ -261,27 +280,27 @@ public class MainActivity extends AppCompatActivity {
                 switch (menuItem.getItemId()) {
                     //Replacing the main content with ContentFragment Which is our Inbox View;
                     case R.id.home:
-                        idx = R.id.home;
+//                        idx = R.id.home;
                         navItemIndex = 0;
                         CURRENT_TAG = TAG_HOME;
                         break;
                     case R.id.events:
-                        idx = R.id.events;
+//                        idx = R.id.events;
                         navItemIndex = 1;
                         CURRENT_TAG = TAG_EVENTS;
                         break;
                     case R.id.work:
-                        idx = R.id.work;
+//                        idx = R.id.work;
                         navItemIndex = 2;
                         CURRENT_TAG = TAG_WORKSHOPS;
                         break;
                     case R.id.shows:
-                        idx = R.id.shows;
+//                        idx = R.id.shows;
                         navItemIndex = 3;
                         CURRENT_TAG = TAG_SHOWS;
                         break;
                     case R.id.summit:
-                        idx = R.id.summit;
+//                        idx = R.id.summit;
                         navItemIndex = 4;
                         CURRENT_TAG = TAG_SUMMIT;
                         break;
@@ -290,15 +309,17 @@ public class MainActivity extends AppCompatActivity {
                         navItemIndex = 5;
                         CURRENT_TAG = TAG_MAP;
                         break;
-                    case R.id.spons:
-                        idx = R.id.spons;
+                    case R.id.feedback:
+//                        idx = R.id.feedback;
                         navItemIndex = 6;
                         CURRENT_TAG = TAG_SPONSORS;
                         break;
-                    case R.id.about:
-                        navItemIndex = 7;
-                        CURRENT_TAG = TAG_ABOUTUS;
-                        break;
+                    case R.id.qrscanner:
+//                        navItemIndex = 7;
+                        new IntentIntegrator(MainActivity.this).initiateScan();
+                        drawer.closeDrawers();
+                        return true;
+//                        break;
                         // launch new intent instead of loading fragment
 //                        startActivity(new Intent(MainActivity.this, AboutUsActivity.class));
 //                        drawer.closeDrawers();
@@ -364,8 +385,8 @@ public class MainActivity extends AppCompatActivity {
             if (navItemIndex != 0) {
                 navItemIndex = 0;
                 CURRENT_TAG = TAG_HOME;
-                idx = R.id.home;
-                navigationView.getMenu().findItem(idx).setChecked(true);
+//                idx = R.id.home;
+//                navigationView.getMenu().findItem(navItemIndex).setChecked(true);
                 loadHomeFragment();
                 return;
             }

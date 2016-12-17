@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "37218840170",
+    "firebase_url": "https://shaastra-2017.firebaseio.com",
+    "project_id": "shaastra-2017",
+    "storage_bucket": "shaastra-2017.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:37218840170:android:87f62503fc97aed6",
+        "android_client_info": {
+          "package_name": "shaastra.com.android_app_2017"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "37218840170-2g9kif4sks0o0ib4odru70n0003nv0mf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBW9xz_cIK7a_Ugj0tKwB6YKBpjctAwIuk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "37218840170-2g9kif4sks0o0ib4odru70n0003nv0mf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

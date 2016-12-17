@@ -95,13 +95,6 @@ public class EventsActivity extends AppCompatActivity {
             }
         });
 
-        sharelayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Share", Toast.LENGTH_SHORT).show();
-            }
-        });
-
         calllayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -118,9 +111,9 @@ public class EventsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 //                Toast.makeText(getApplicationContext(), "Bookmark", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(EventsActivity.this, MapsActivity.class);
-                intent.putExtra("location", venue);
-                startActivity(intent);
+//                Intent intent = new Intent(EventsActivity.this, MapsActivity.class);
+//                intent.putExtra("location", venue);
+//                startActivity(intent);
             }
         });
         //Initialising the Footer with Bootom Navigation bar
@@ -167,10 +160,7 @@ public class EventsActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        else if(id == android.R.id.home) {
+        if(id == android.R.id.home) {
             finish();
             return true;
         }
@@ -252,9 +242,22 @@ public class EventsActivity extends AppCompatActivity {
 
         protected void onPostExecute(JSONObject response){
             try {
+                final String eventname = response.getJSONObject("data").getString("name");
                 JSONArray object = response.getJSONObject("data").getJSONArray("eventTabs");
                 TextView textView =  (TextView) findViewById(R.id.eventTitle);
                 textView.setText(response.getJSONObject("data").getString("name"));
+                sharelayout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        String shareBody = "Participate in the *" + eventname + "* event at Shaastra 2017. For more details, download the #Shaastra2017 Android app now! ";
+                        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+                        sharingIntent.setType("text/plain");
+                        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Participate in Shaastra 2017!");
+                        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+                        startActivity(Intent.createChooser(sharingIntent, "Share Using"));
+//                Toast.makeText(getApplicationContext(), "Share", Toast.LENGTH_SHORT).show();
+                    }
+                });
                 textView = (TextView) findViewById(R.id.venue);
                 textView.setText(response.getJSONObject("data").getString("venue"));
                 venue = response.getJSONObject("data").getString("venue");
