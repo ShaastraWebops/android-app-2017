@@ -157,15 +157,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 // update the main content by replacing fragments
-                if(navItemIndex != 5) {
-                    Fragment fragment = getHomeFragment();
-                    FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                    fragmentTransaction.setCustomAnimations(android.R.anim.fade_in,
-                            android.R.anim.fade_out);
-                    fragmentTransaction.replace(R.id.frame, fragment, CURRENT_TAG);
-                    fragmentTransaction.commitAllowingStateLoss();
-                }
-                else {
+                if(navItemIndex == 5) {
                     if (ContextCompat.checkSelfPermission(MainActivity.this,
                             android.Manifest.permission.ACCESS_FINE_LOCATION)
                             != PackageManager.PERMISSION_GRANTED) {
@@ -177,8 +169,19 @@ public class MainActivity extends AppCompatActivity {
                         // Should we show an explanation?
                     }
                     else {
-//                        startActivity(new Intent(MainActivity.this, MapsActivity.class));
+                        startActivity(new Intent(MainActivity.this, MapsActivity.class));
                     }
+                }
+                else if(navItemIndex == 6) {
+                    startActivity(new Intent(MainActivity.this, FeedbackActivity.class));
+                }
+                else {
+                    Fragment fragment = getHomeFragment();
+                    FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction.setCustomAnimations(android.R.anim.fade_in,
+                            android.R.anim.fade_out);
+                    fragmentTransaction.replace(R.id.frame, fragment, CURRENT_TAG);
+                    fragmentTransaction.commitAllowingStateLoss();
                 }
             }
         };
@@ -206,7 +209,7 @@ public class MainActivity extends AppCompatActivity {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                    startActivity(new Intent(MainActivity.this, MapsActivity.class));
+                    startActivity(new Intent(MainActivity.this, MapsActivity.class));
 
                     // permission was granted, yay! Do the
                     // contacts-related task you need to do.
@@ -250,11 +253,11 @@ public class MainActivity extends AppCompatActivity {
 //            case 5:
 //                startActivity(new Intent(MainActivity.this, MapsActivity.class));
 
-            case 6:
+//            case 6:
                 // settings fragment
-                FeedbackFragment feedbackFragment = new FeedbackFragment();
+//                FeedbackFragment feedbackFragment = new FeedbackFragment();
 //                startActivity(new Intent(MainActivity.this, VerticalActivity.class));
-                return feedbackFragment;
+//                return feedbackFragment;
             default:
                 return new HomeFragment();
         }
