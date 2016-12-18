@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <group android:checkableBehavior="single">
+    <group android:checkableBehavior="single" >
 
         <item
             android:id="@+id/home"
-            android:checked="false"
+            android:checked="true"
             android:title="@string/home_string"
             android:icon="@drawable/home"
             android:textAppearance="?android:attr/textAppearanceMedium"/>
@@ -24,27 +24,44 @@
             android:textAppearance="?android:attr/textAppearanceMedium"/>
 
         <item
+            android:id="@+id/shows"
+            android:checked="false"
+            android:title="@string/shows_string"
+            android:icon="@drawable/summit_icon"
+            android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+        <item
             android:id="@+id/summit"
             android:checked="false"
             android:title="@string/summit_string"
             android:icon="@drawable/summit"
             android:textAppearance="?android:attr/textAppearanceMedium"/>
+        <item
+            android:id="@+id/map"
+            android:checked="false"
+            android:title="@string/map_string"
+            android:icon="@drawable/map_icon"
+            android:textAppearance="?android:attr/textAppearanceMedium"/>
+        <!--</group>-->
 
-        <item android:title="Other">
+        <item
+            android:id="@+id/other"
+            android:title="Other">
             <menu>
-                <item
-                    android:id="@+id/spons"
-                    android:checked="false"
-                    android:title="@string/sponsors_string"
-                    android:icon="@drawable/spons"
-                    android:textAppearance="?android:attr/textAppearanceMedium"/>
-                <item
-                    android:id="@+id/about"
-                    android:checked="false"
-                    android:title="@string/aboutus_string"
-                    android:icon="@drawable/about"
-                    android:textAppearance="?android:attr/textAppearanceMedium"/>
-
+                <!--<group android:checkableBehavior="single">-->
+                    <item
+                        android:id="@+id/feedback"
+                        android:checked="false"
+                        android:title="@string/feedback_string"
+                        android:icon="@drawable/feedback"
+                        android:textAppearance="?android:attr/textAppearanceMedium"/>
+                    <item
+                        android:id="@+id/qrscanner"
+                        android:checked="false"
+                        android:title="@string/qr_string"
+                        android:icon="@drawable/qr"
+                        android:textAppearance="?android:attr/textAppearanceMedium"/>
+                <!--</group>-->
             </menu>
         </item>
 

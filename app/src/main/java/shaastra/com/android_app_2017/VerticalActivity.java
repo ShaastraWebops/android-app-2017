@@ -10,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 
 import org.json.JSONArray;
@@ -56,6 +57,8 @@ public class VerticalActivity extends AppCompatActivity {
         setContentView(R.layout.activity_vertical);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle(getIntent().getStringExtra("listname"));
 
         String url = "http://shaastra.org:8001/api/eventLists/events/"+getIntent().getStringExtra("listid");
@@ -84,6 +87,19 @@ public class VerticalActivity extends AppCompatActivity {
 
 
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+
+        if(id == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     //Class to asynchronously fetch event details from API

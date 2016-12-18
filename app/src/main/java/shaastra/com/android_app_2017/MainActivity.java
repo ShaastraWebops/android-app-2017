@@ -4,22 +4,30 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.Toast;
+
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,10 +36,13 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG_HOME = "home";
     private static final String TAG_EVENTS = "events";
     private static final String TAG_WORKSHOPS = "workshops";
-    private static final String TAG_SUMMIT = "summit";
+    private static final String TAG_SHOWS = "shows";
+    private static final String TAG_MAP = "summit";
+    private static final String TAG_SUMMIT = "map";
     private static final String TAG_SPONSORS = "sponsors";
     private static final String TAG_ABOUTUS = "about us";
     public static String CURRENT_TAG = TAG_HOME;
+//    public int idx;
     private DrawerLayout drawer;
     private Handler mHandler;
     public static int navItemIndex = 0;
@@ -40,11 +51,13 @@ public class MainActivity extends AppCompatActivity {
     private NavigationView navigationView;
 
     private boolean shouldLoadHomeFragOnBackPress = true;
+    private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 123;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+//        idx = R.id.home;
         toolbar = (Toolbar) findViewById(R.id.toolbar);
 
 
@@ -91,6 +104,28 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        navigationView.getMenu().getItem(navItemIndex).setChecked(true);
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if(result != null) {
+            if(result.getContents() == null) {
+                Log.d("MainActivity", "Cancelled scan");
+                Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
+            } else {
+                Log.d("MainActivity", "Scanned");
+                Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
+            }
+        } else {
+            // This is important, otherwise the result will not be passed to the fragment
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
     /***
      * Returns respected fragment that user
      * selected from navigation menu
@@ -100,7 +135,9 @@ public class MainActivity extends AppCompatActivity {
         selectNavMenu();
 
         // set toolbar title
-        setToolbarTitle();
+//        if(navItemIndex != 5) {
+            setToolbarTitle();
+//        }
 
         // if user select the current navigation menu again, don't do anything
         // just close the navigation drawer
@@ -120,12 +157,29 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 // update the main content by replacing fragments
-                Fragment fragment = getHomeFragment();
-                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.setCustomAnimations(android.R.anim.fade_in,
-                        android.R.anim.fade_out);
-                fragmentTransaction.replace(R.id.frame, fragment, CURRENT_TAG);
-                fragmentTransaction.commitAllowingStateLoss();
+                if(navItemIndex != 5) {
+                    Fragment fragment = getHomeFragment();
+                    FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction.setCustomAnimations(android.R.anim.fade_in,
+                            android.R.anim.fade_out);
+                    fragmentTransaction.replace(R.id.frame, fragment, CURRENT_TAG);
+                    fragmentTransaction.commitAllowingStateLoss();
+                }
+                else {
+                    if (ContextCompat.checkSelfPermission(MainActivity.this,
+                            android.Manifest.permission.ACCESS_FINE_LOCATION)
+                            != PackageManager.PERMISSION_GRANTED) {
+//                        Toast.makeText(getApplicationContext(), "No perm", Toast.LENGTH_LONG).show();
+                        ActivityCompat.requestPermissions(MainActivity.this,
+                                new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
+                                MY_PERMISSIONS_REQUEST_READ_CONTACTS);
+
+                        // Should we show an explanation?
+                    }
+                    else {
+//                        startActivity(new Intent(MainActivity.this, MapsActivity.class));
+                    }
+                }
             }
         };
 
@@ -144,6 +198,32 @@ public class MainActivity extends AppCompatActivity {
         invalidateOptionsMenu();
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_READ_CONTACTS: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                    startActivity(new Intent(MainActivity.this, MapsActivity.class));
+
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+
+                } else {
+
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request
+        }
+    }
+
     private Fragment getHomeFragment() {
         switch (navItemIndex) {
             case 0:
@@ -160,14 +240,21 @@ public class MainActivity extends AppCompatActivity {
                 return workshopsFragment;
             case 3:
                 // notifications fragment
+                ShowsFragment showsFragment = new ShowsFragment();
+                return showsFragment;
+            case 4:
+                // notifications fragment
                 SummitFragment summitFragment = new SummitFragment();
                 return summitFragment;
 
-            case 4:
+//            case 5:
+//                startActivity(new Intent(MainActivity.this, MapsActivity.class));
+
+            case 6:
                 // settings fragment
-//                SponsorsFragment sponsorsFragment = new SponsorsFragment();
-                startActivity(new Intent(MainActivity.this, VerticalActivity.class));
-//                return sponsorsFragment;
+                FeedbackFragment feedbackFragment = new FeedbackFragment();
+//                startActivity(new Intent(MainActivity.this, VerticalActivity.class));
+                return feedbackFragment;
             default:
                 return new HomeFragment();
         }
@@ -178,7 +265,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void selectNavMenu() {
-        navigationView.getMenu().getItem(navItemIndex).setChecked(true);
+//        navigationView.getMenu().getItem(navItemIndex).setChecked(true);
     }
 
     private void setUpNavigationView() {
@@ -188,35 +275,55 @@ public class MainActivity extends AppCompatActivity {
             // This method will trigger on item Click of navigation menu
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
-
+//                idx = menuItem.getItemId();
                 //Check to see which item was being clicked and perform appropriate action
                 switch (menuItem.getItemId()) {
                     //Replacing the main content with ContentFragment Which is our Inbox View;
                     case R.id.home:
+//                        idx = R.id.home;
                         navItemIndex = 0;
                         CURRENT_TAG = TAG_HOME;
                         break;
                     case R.id.events:
+//                        idx = R.id.events;
                         navItemIndex = 1;
                         CURRENT_TAG = TAG_EVENTS;
                         break;
                     case R.id.work:
+//                        idx = R.id.work;
                         navItemIndex = 2;
                         CURRENT_TAG = TAG_WORKSHOPS;
                         break;
-                    case R.id.summit:
+                    case R.id.shows:
+//                        idx = R.id.shows;
                         navItemIndex = 3;
+                        CURRENT_TAG = TAG_SHOWS;
+                        break;
+                    case R.id.summit:
+//                        idx = R.id.summit;
+                        navItemIndex = 4;
                         CURRENT_TAG = TAG_SUMMIT;
                         break;
-                    case R.id.spons:
-                        navItemIndex = 4;
+                    case R.id.map:
+//                        idx = R.id.map;
+                        navItemIndex = 5;
+                        CURRENT_TAG = TAG_MAP;
+                        break;
+                    case R.id.feedback:
+//                        idx = R.id.feedback;
+                        navItemIndex = 6;
                         CURRENT_TAG = TAG_SPONSORS;
                         break;
-                    case R.id.about:
-                        // launch new intent instead of loading fragment
-                        startActivity(new Intent(MainActivity.this, AboutUsActivity.class));
+                    case R.id.qrscanner:
+//                        navItemIndex = 7;
+                        new IntentIntegrator(MainActivity.this).initiateScan();
                         drawer.closeDrawers();
                         return true;
+//                        break;
+                        // launch new intent instead of loading fragment
+//                        startActivity(new Intent(MainActivity.this, AboutUsActivity.class));
+//                        drawer.closeDrawers();
+//                        return true;
 //                    case R.id.nav_privacy_policy:
 //                        // launch new intent instead of loading fragment
 //                        startActivity(new Intent(MainActivity.this, PrivacyPolicyActivity.class));
@@ -278,6 +385,8 @@ public class MainActivity extends AppCompatActivity {
             if (navItemIndex != 0) {
                 navItemIndex = 0;
                 CURRENT_TAG = TAG_HOME;
+//                idx = R.id.home;
+//                navigationView.getMenu().findItem(navItemIndex).setChecked(true);
                 loadHomeFragment();
                 return;
             }
@@ -313,12 +422,11 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }
+        else if(id == android.R.id.home) {
+            finish();
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public void eventActivity(MenuItem item){
-        Intent intent = new Intent(this, EventsActivity.class);
-        startActivity(intent);
     }
 }
