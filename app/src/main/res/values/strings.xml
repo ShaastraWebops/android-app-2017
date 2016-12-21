@@ -118,4 +118,12 @@
     <string name="question2">Difficulty level of the event. \n(1 being easiest, 5 being toughest)</string>
     <string name="question3">Rate the organization of the event \n(1 being very poor, 5 being excellent)</string>
     <string name="question4">Rate about the quality of questions asked in the event, or the problem statement of the event \n(1 being poor, 5 being excellent)</string>
+    <string name="question5"> Was the time sufficient to prepare for the event \n(1 being not at all, 5 being definitely Yes) </string>
+    <string name="event_prompt">Select an event</string>
+
+    <string-array name="event_names">
+        <item>Aeromodelling</item>
+        <item>Reverse Coding</item>
+        <item>Android Workshop</item>
+    </string-array>
 </resources>

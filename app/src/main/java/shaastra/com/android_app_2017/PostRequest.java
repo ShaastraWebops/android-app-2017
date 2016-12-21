@@ -22,7 +22,7 @@ public class PostRequest {
 
     public static String LOG_TAG = "PostReqeust";
 
-    public static JSONObject execute(String urlString,ArrayList<PostParam> params, String token){
+    public static JSONObject execute(String urlString,ArrayList<PostParam> params){
 
         URL url;
         int status = 989;
@@ -40,7 +40,7 @@ public class PostRequest {
             connection.setRequestMethod("POST");
             connection.setRequestProperty("Content-Type",
                     "application/x-www-form-urlencoded");
-            connection.setRequestProperty("Authorization", "Bearer " + token);
+            connection.setRequestProperty("Authorization", "Bearer ");
 
             //Setting url parameters for post request
             String urlParameters = null;
@@ -69,6 +69,7 @@ public class PostRequest {
 
             //Check if response code is 200 OK
             status = connection.getResponseCode();
+            Log.d("Status code", String.valueOf(status));
             jsonResponse.put("status", status);
 
             if(status/100 != 2){
@@ -105,7 +106,7 @@ public class PostRequest {
         }
     }
 
-    public static JSONObject execute(String urlString,JSONObject jsonObject, String token){
+    public static JSONObject execute(String urlString,JSONObject jsonObject){
 
         URL url;
         int status = 989;
@@ -122,7 +123,7 @@ public class PostRequest {
             connection = (HttpURLConnection)url.openConnection();
             connection.setRequestMethod("POST");
             connection.setRequestProperty("content-type","application/json; charset=utf-8");
-            connection.setRequestProperty("Authorization", "Bearer " + token);
+            connection.setRequestProperty("Authorization", "Bearer ");
 
             //Setting url parameters for post request
 

@@ -158,22 +158,10 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 // update the main content by replacing fragments
                 if(navItemIndex == 5) {
-                    if (ContextCompat.checkSelfPermission(MainActivity.this,
-                            android.Manifest.permission.ACCESS_FINE_LOCATION)
-                            != PackageManager.PERMISSION_GRANTED) {
-//                        Toast.makeText(getApplicationContext(), "No perm", Toast.LENGTH_LONG).show();
-                        ActivityCompat.requestPermissions(MainActivity.this,
-                                new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
-                                MY_PERMISSIONS_REQUEST_READ_CONTACTS);
 
-                        // Should we show an explanation?
-                    }
-                    else {
-                        startActivity(new Intent(MainActivity.this, MapsActivity.class));
-                    }
                 }
                 else if(navItemIndex == 6) {
-                    startActivity(new Intent(MainActivity.this, FeedbackActivity.class));
+
                 }
                 else {
                     Fragment fragment = getHomeFragment();
@@ -309,13 +297,29 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.map:
 //                        idx = R.id.map;
-                        navItemIndex = 5;
-                        CURRENT_TAG = TAG_MAP;
-                        break;
+//                        navItemIndex = 5;
+//                        CURRENT_TAG = TAG_MAP;
+                        drawer.closeDrawers();
+                        if (ContextCompat.checkSelfPermission(MainActivity.this,
+                                android.Manifest.permission.ACCESS_FINE_LOCATION)
+                                != PackageManager.PERMISSION_GRANTED) {
+//                        Toast.makeText(getApplicationContext(), "No perm", Toast.LENGTH_LONG).show();
+                            ActivityCompat.requestPermissions(MainActivity.this,
+                                    new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
+                                    MY_PERMISSIONS_REQUEST_READ_CONTACTS);
+
+                            // Should we show an explanation?
+                        }
+                        else {
+                            startActivity(new Intent(MainActivity.this, MapsActivity.class));
+                        }
+                        return true;
                     case R.id.feedback:
 //                        idx = R.id.feedback;
-                        navItemIndex = 6;
-                        CURRENT_TAG = TAG_SPONSORS;
+//                        navItemIndex = 6;
+//                        CURRENT_TAG = TAG_SPONSORS;
+                        drawer.closeDrawers();
+                        startActivity(new Intent(MainActivity.this, FeedbackActivity.class));
                         break;
                     case R.id.qrscanner:
 //                        navItemIndex = 7;
