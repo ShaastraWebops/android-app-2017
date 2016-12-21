@@ -114,4 +114,8 @@
     <string name="map_string">Map</string>
     <string name="feedback_string">Feedback</string>
     <string name="qr_string">QR Scanner</string>
+    <string name="question1">The time provided for the test was sufficient. \n(1 being not satisfied, 5 being satisfied)</string>
+    <string name="question2">Difficulty level of the event. \n(1 being easiest, 5 being toughest)</string>
+    <string name="question3">Rate the organization of the event \n(1 being very poor, 5 being excellent)</string>
+    <string name="question4">Rate about the quality of questions asked in the event, or the problem statement of the event \n(1 being poor, 5 being excellent)</string>
 </resources>
