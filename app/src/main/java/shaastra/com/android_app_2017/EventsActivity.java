@@ -173,6 +173,7 @@ public class EventsActivity extends AppCompatActivity {
         while (tab < object.length()){
             mSectionsPagerAdapter.addFragment(PlaceholderFragment.newInstance(tab),
                     ((JSONObject) object.get(tab)).getString("name"));
+            mSectionsPagerAdapter.sort();
             jsonArr.put(tab, ((JSONObject) object.get(tab)).getString("info"));
             tab++;
         }
@@ -264,11 +265,16 @@ public class EventsActivity extends AppCompatActivity {
                 textView = (TextView) findViewById(R.id.date);
                 String dateText = response.getJSONObject("data").getString("eventDate");
 
-                String formattedDate = formatDate(dateText);
-                if (formattedDate != null)
-                    textView.setText(formatDate(dateText));
+                if (dateText != null && dateText.length() >= 10){
+                    String formattedDate = formatDate(dateText);
+                    if (formattedDate != null)
+                        textView.setText(formatDate(dateText));
+                }
 
-                dialPhone = ((JSONObject) response.getJSONObject("data").getJSONArray("assignees").get(0)).getString("phoneNumber");
+                JSONArray assignees = response.getJSONObject("data").getJSONArray("assignees");
+                if (assignees != null && assignees.length() >= 1){
+                    dialPhone = ((JSONObject) assignees.get(0)).getString("phoneNumber");
+                }
                 saveResponse(object);
                 mSectionsPagerAdapter.addResponse(object);
             } catch (JSONException e) {
@@ -301,6 +307,16 @@ public class EventsActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 ind++;
+            }
+        }
+
+        public void sort(){
+            int homeIndex = mFragmentTitleList.indexOf("Home");
+            if ( homeIndex != -1){
+                mFragmentTitleList.remove(homeIndex);
+                PlaceholderFragment homeFragment = mFragmentList.remove(homeIndex);
+                mFragmentList.add(0, homeFragment);
+                mFragmentTitleList.add(0, "Home");
             }
         }
 
