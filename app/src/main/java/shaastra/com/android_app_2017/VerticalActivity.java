@@ -25,10 +25,14 @@ public class VerticalActivity extends AppCompatActivity {
     public RecyclerView recyclerView;
     public VerticalAdapter adapter;
     int themeres;
+    int image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Bundle sentmessage = getIntent().getExtras();
+        image = sentmessage.getInt("image");
         if(getIntent().getStringExtra("listname").equalsIgnoreCase("Aerofest")) {
             themeres = (R.style.AerofestTheme);
         }
@@ -89,18 +93,7 @@ public class VerticalActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-
-        if(id == android.R.id.home) {
-            finish();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     //Class to asynchronously fetch event details from API
     class FetchVerticalTask extends AsyncTask<String, Void, JSONObject> {
@@ -132,7 +125,7 @@ public class VerticalActivity extends AppCompatActivity {
 //                TextView textView =  (TextView) findViewById(R.id.eventTitle);
 //                textView.setText(response.getJSONObject("data").getString("name"));
                 recyclerView = (RecyclerView) findViewById(R.id.verticals_view);
-                adapter = new VerticalAdapter(list, themeres, getIntent().getStringExtra("listname"));
+                adapter = new VerticalAdapter(list, themeres, getIntent().getStringExtra("listname"),getIntent().getExtras().getInt("image"));
                 recyclerView.setLayoutManager(new LinearLayoutManager(VerticalActivity.this));
                 recyclerView.setAdapter(adapter);
             } catch (JSONException e) {

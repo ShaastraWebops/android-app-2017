@@ -17,21 +17,23 @@
             android:layout_height="wrap_content">
             <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="-30dp"
-                android:layout_marginBottom="20dp">
+                android:layout_height="wrap_content">
+
 
                 <ImageView
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/summit_banner"
-                    android:id="@+id/summit_banner"/>
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:id="@+id/summit_build"
+                    android:src="@drawable/summit2"
+                    android:layout_marginBottom="10dp" />
+
+
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Past Versions"
-                    android:layout_below="@+id/summit_banner"
-                    android:layout_marginTop="-55dp"
+                    android:layout_below="@+id/summit_build"
                     android:id="@+id/summ_past_title"
                     android:textSize="20dp"
                     android:textColor="#000"
@@ -48,21 +50,15 @@
                     android:textColor="#000"
                     android:id="@+id/summit_past_para1"/>
                 <TextView
-                    android:layout_width="180dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/summit_past_para2"
-                    android:paddingLeft="5dp"
                     android:layout_below="@id/summit_past_para1"
                     android:layout_marginTop="10dp"
+                    android:paddingLeft="5dp"
                     android:textColor="#000"
                     android:id="@+id/summit_past_para2" />
-                <ImageView
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/summit_build"
-                    android:src="@drawable/summit2"
-                    android:layout_toRightOf="@+id/summit_past_para2"
-                    android:layout_below="@+id/summit_past_para1"/>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

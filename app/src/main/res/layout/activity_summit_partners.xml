@@ -19,20 +19,20 @@
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="-30dp"
                 android:layout_marginBottom="20dp">
 
                 <ImageView
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/summit_banner"
-                    android:id="@+id/summit_banner"/>
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:id="@+id/summit_build"
+                    android:src="@drawable/summit2"
+                    android:layout_marginBottom="10dp"/>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Partners"
-                    android:layout_below="@+id/summit_banner"
-                    android:layout_marginTop="-55dp"
+                    android:layout_below="@+id/summit_build"
                     android:id="@+id/summ_partners_title"
                     android:textSize="20dp"
                     android:textColor="#000"

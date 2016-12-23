@@ -17,19 +17,13 @@
             android:layout_height="wrap_content">
             <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="-30dp">
+                android:layout_height="wrap_content">
 
-                <ImageView
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/summit_banner"
-                    android:id="@+id/summit_banner"/>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/summit_main_para1"
-                    android:layout_below="@id/summit_banner"
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
                     android:layout_marginTop="-50dp"

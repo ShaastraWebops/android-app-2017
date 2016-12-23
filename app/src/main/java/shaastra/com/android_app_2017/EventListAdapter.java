@@ -34,7 +34,7 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.view
     }
 
     @Override
-    public void onBindViewHolder(EventListAdapter.viewHolder holder, int position) {
+    public void onBindViewHolder(EventListAdapter.viewHolder holder, final int position) {
         final EventListitem i = verticalList.get(position);
 //        holder.title1.setText(i.getItemName());
         holder.imageview.setImageDrawable(context.getResources().getDrawable(imageresources[position]));
@@ -44,6 +44,8 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.view
                 Intent intent = new Intent(context.getApplicationContext(), VerticalActivity.class);
                 intent.putExtra("listname", i.getItemName());
                 intent.putExtra("listid", i.getItemid());
+                intent.putExtra("image",imageresources[position]);
+
                 context.startActivity(intent);
             }
         });

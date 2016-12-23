@@ -33,7 +33,7 @@ public class WorkshopListAdapter extends RecyclerView.Adapter<WorkshopListAdapte
     }
 
     @Override
-    public void onBindViewHolder(WorkshopListAdapter.viewHolder holder, int position) {
+    public void onBindViewHolder(WorkshopListAdapter.viewHolder holder, final int position) {
         final EventListitem i = verticalList.get(position);
 //        holder.title1.setText(i.getItemName());
         holder.imageview.setImageDrawable(context.getResources().getDrawable(imageresources[position]));
@@ -43,6 +43,7 @@ public class WorkshopListAdapter extends RecyclerView.Adapter<WorkshopListAdapte
                 Intent intent = new Intent(context.getApplicationContext(), WorkshopVerticalActivity.class);
                 intent.putExtra("listname", i.getItemName());
                 intent.putExtra("listid", i.getItemid());
+                intent.putExtra("image",imageresources[position]);
                 context.startActivity(intent);
             }
         });

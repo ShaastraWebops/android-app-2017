@@ -1,10 +1,13 @@
 package shaastra.com.android_app_2017;
 
+import android.*;
+import android.Manifest;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
@@ -29,7 +32,11 @@ import android.widget.Toast;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import java.io.File;
+
 public class MainActivity extends AppCompatActivity {
+
+    
 
 
     private String[] activityTitles;
@@ -144,8 +151,7 @@ public class MainActivity extends AppCompatActivity {
         if (getSupportFragmentManager().findFragmentByTag(CURRENT_TAG) != null) {
             drawer.closeDrawers();
 
-            // show or hide the fab button
-            toggleFab();
+
             return;
         }
 
@@ -179,8 +185,7 @@ public class MainActivity extends AppCompatActivity {
             mHandler.post(mPendingRunnable);
         }
 
-        // show or hide the fab button
-        toggleFab();
+
 
         //Closing drawer on item click
         drawer.closeDrawers();
@@ -213,6 +218,8 @@ public class MainActivity extends AppCompatActivity {
             // other 'case' lines to check for other
             // permissions this app might request
         }
+
+
     }
 
     private Fragment getHomeFragment() {
@@ -297,15 +304,16 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.map:
 //                        idx = R.id.map;
-//                        navItemIndex = 5;
-//                        CURRENT_TAG = TAG_MAP;
+                         navItemIndex = 5;
+                        CURRENT_TAG = TAG_MAP;
                         drawer.closeDrawers();
                         if (ContextCompat.checkSelfPermission(MainActivity.this,
-                                android.Manifest.permission.ACCESS_FINE_LOCATION)
-                                != PackageManager.PERMISSION_GRANTED) {
+                                Manifest.permission.ACCESS_FINE_LOCATION)
+                                != PackageManager.PERMISSION_GRANTED)
+                        {
 //                        Toast.makeText(getApplicationContext(), "No perm", Toast.LENGTH_LONG).show();
                             ActivityCompat.requestPermissions(MainActivity.this,
-                                    new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
+                                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                                     MY_PERMISSIONS_REQUEST_READ_CONTACTS);
 
                             // Should we show an explanation?
@@ -314,16 +322,17 @@ public class MainActivity extends AppCompatActivity {
                             startActivity(new Intent(MainActivity.this, MapsActivity.class));
                         }
                         return true;
-                    case R.id.feedback:
-//                        idx = R.id.feedback;
-//                        navItemIndex = 6;
-//                        CURRENT_TAG = TAG_SPONSORS;
-                        drawer.closeDrawers();
-                        startActivity(new Intent(MainActivity.this, FeedbackActivity.class));
-                        break;
+
                     case R.id.qrscanner:
 //                        navItemIndex = 7;
-                        new IntentIntegrator(MainActivity.this).initiateScan();
+
+
+
+
+
+
+                    new IntentIntegrator(MainActivity.this).initiateScan();
+
                         drawer.closeDrawers();
                         return true;
 //                        break;
@@ -403,37 +412,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    // show or hide the fab
-    private void toggleFab() {
-        if (navItemIndex == 0)
-            fab.show();
-        else
-            fab.hide();
-    }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        else if(id == android.R.id.home) {
-            finish();
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }

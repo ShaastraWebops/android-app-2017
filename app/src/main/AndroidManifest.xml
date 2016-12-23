@@ -45,11 +45,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".EventsActivity"
-            android:label="@string/title_activity_events"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" />
-        <activity
             android:name=".AboutUsActivity"
             android:label="@string/title_activity_about_us"
             android:screenOrientation="portrait"
@@ -120,6 +115,7 @@
             android:label="@string/title_activity_maps"
             android:screenOrientation="portrait" />
         <activity android:name=".FeedbackActivity"></activity>
+        <activity android:name=".EventsActivity"></activity>
     </application>
 
 </manifest>

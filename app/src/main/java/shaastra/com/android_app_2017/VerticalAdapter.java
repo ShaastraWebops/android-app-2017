@@ -19,11 +19,13 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.viewHo
     private List<VerticalItem> verticalList;
     int themeres;
     String verticalname;
-    public VerticalAdapter(List<VerticalItem> list, int themeres, String verticalname)
+    int image;
+    public VerticalAdapter(List<VerticalItem> list, int themeres, String verticalname,int image)
     {
         this.verticalList = list;
         this.themeres = themeres;
         this.verticalname = verticalname;
+        this.image = image;
     }
 
 
@@ -41,12 +43,15 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.viewHo
             @Override
             public void onClick(View view)
             {
+
                 Context context = view.getContext();
                 Intent intent = new Intent(context, EventsActivity.class);
                 intent.putExtra("itemname", i.getItemName());
                 intent.putExtra("itemid", i.getItemid());
                 intent.putExtra("theme", themeres);
                 intent.putExtra("verticalname", verticalname);
+                intent.putExtra("image_name",image);
+
                 view.getContext().startActivity(intent);
             }
         });

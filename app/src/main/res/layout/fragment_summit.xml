@@ -15,13 +15,6 @@
             android:id="@+id/summit_build"
             android:src="@drawable/summit2" />
 
-        <ImageView
-                android:layout_width="150dp"
-                android:adjustViewBounds="true"
-                android:layout_marginLeft="10dp"
-                android:layout_height="wrap_content"
-                android:src="@drawable/summit_banner"
-                android:id="@+id/summit_banner"/>
 
         <TextView
                 android:layout_width="wrap_content"

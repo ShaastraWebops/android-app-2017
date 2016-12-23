@@ -36,6 +36,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.OutputStreamWriter;
 import java.text.DateFormatSymbols;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
@@ -72,12 +78,9 @@ public class EventsActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
         toolbar.setTitle(getIntent().getStringExtra("verticalname"));
         setSupportActionBar(toolbar);
+
         //setTitle(getIntent().getStringExtra("verticalname"));
 
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
 
         CollapsingToolbarLayout toolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
         if (toolbarLayout != null){
@@ -88,10 +91,59 @@ public class EventsActivity extends AppCompatActivity {
         calllayout = (LinearLayout) findViewById(R.id.callLayout);
         sharelayout = (LinearLayout) findViewById(R.id.shareLayout);
 
+        final String itemid = getIntent().getStringExtra("itemid");
+        final String itemname = getIntent().getStringExtra("itemname");
+        final int theme = getIntent().getIntExtra("theme",0);
+        final String verticalname = getIntent().getStringExtra("verticalname");
+
+
+
         bookmarklayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(), "Bookmarked", Toast.LENGTH_SHORT).show();
+                File f = new File(getCacheDir()+File.separator+"Bookmarks.txt");
+                Log.e("error_1",String.valueOf(getCacheDir()));
+                boolean found = false;
+                try
+                {
+                    Log.e("error_1","enetered try");
+                    BufferedReader reader = new BufferedReader(new FileReader(f));
+                    StringBuilder lines=null;
+                    String line;
+                    while( (line = reader.readLine()) != null)
+                    {
+                        Log.e("error_1","entered while");
+                        if(!line.startsWith(itemid))
+                        {
+                            lines.append(line);
+                        }
+                        else
+                        {
+                            found = true;
+                        }
+                    }
+                    reader.close();
+                    if(!found)
+                    {
+                        lines.append(itemid+"\t"+itemname+"\t"+String.valueOf(theme)+"\t"+verticalname+"\t"+String.valueOf(getIntent().getExtras().getInt("image_name"))+"\n");
+                    }
+                    FileOutputStream oStream = new FileOutputStream(f);
+                    OutputStreamWriter writer = new OutputStreamWriter(oStream);
+                    writer.write(String.valueOf(lines));
+                    writer.flush();
+                    writer.close();
+
+                    Log.e("error_1","kfdjkd" + String.valueOf(lines));
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+
+
+                
+
             }
         });
 
@@ -110,10 +162,10 @@ public class EventsActivity extends AppCompatActivity {
         locatelayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Toast.makeText(getApplicationContext(), "Bookmark", Toast.LENGTH_SHORT).show();
-//                Intent intent = new Intent(EventsActivity.this, MapsActivity.class);
-//                intent.putExtra("location", venue);
-//                startActivity(intent);
+                Toast.makeText(getApplicationContext(), "Bookmark", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(EventsActivity.this, MapsActivity.class);
+                intent.putExtra("location", venue);
+                startActivity(intent);
             }
         });
         //Initialising the Footer with Bootom Navigation bar
@@ -251,10 +303,10 @@ public class EventsActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         String shareBody = "Participate in the *" + eventname + "* event at Shaastra 2017. For more details, download the #Shaastra2017 Android app now! ";
-                        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+                        Intent sharingIntent = new Intent(Intent.ACTION_SEND);
                         sharingIntent.setType("text/plain");
-                        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Participate in Shaastra 2017!");
-                        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+                        sharingIntent.putExtra(Intent.EXTRA_SUBJECT, "Participate in Shaastra 2017!");
+                        sharingIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
                         startActivity(Intent.createChooser(sharingIntent, "Share Using"));
 //                Toast.makeText(getApplicationContext(), "Share", Toast.LENGTH_SHORT).show();
                     }

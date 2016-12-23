@@ -88,7 +88,7 @@ public class WorkshopVerticalActivity extends AppCompatActivity {
 //                TextView textView =  (TextView) findViewById(R.id.eventTitle);
 //                textView.setText(response.getJSONObject("data").getString("name"));
                 recyclerView = (RecyclerView) findViewById(R.id.verticals_view);
-                adapter = new VerticalAdapter(list, themeres, getIntent().getStringExtra("listname"));
+                adapter = new VerticalAdapter(list, themeres, getIntent().getStringExtra("listname"),getIntent().getExtras().getInt("image"));
                 recyclerView.setLayoutManager(new LinearLayoutManager(WorkshopVerticalActivity.this));
                 recyclerView.setAdapter(adapter);
             } catch (JSONException e) {
